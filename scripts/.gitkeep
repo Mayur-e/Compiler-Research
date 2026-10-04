@@ -1,0 +1,5 @@
+# Future: automation scripts
+# This directory will hold Python / CMake scripts for running the full
+# experimental pipeline (build, configure A/B/C, collect metrics, compare).
+# Scripts are not created until the corresponding analysis components exist.
+# See docs/development.md §19 (Phase 13) and docs/experiments.md.

@@ -1,0 +1,4 @@
+# Future: solver headers
+# This directory will hold the public API for the fixpoint/worklist
+# propagation engine used by both liveness (backward) and HRA (forward).
+# See docs/architecture.md §16 and docs/design.md §11.

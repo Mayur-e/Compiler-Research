@@ -1,0 +1,5 @@
+# Future: benchmarks
+# This directory will hold C benchmark programs and the harness for running
+# Configurations A / B / C and collecting metrics.
+# See docs/benchmarks.md for selection criteria and expected program families.
+# Benchmark programs will be added after the frontend (Phase 2) is in place.

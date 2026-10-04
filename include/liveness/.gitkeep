@@ -1,0 +1,5 @@
+# Future: liveness analysis headers
+# This directory will hold the public API for backward pointer-liveness
+# analysis (LIVE-IN / LIVE-OUT, LiveSet, USE/DEF information).
+# Implements Configuration B support. See docs/project.md §11 and
+# docs/design.md §§8–11.

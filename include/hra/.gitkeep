@@ -1,0 +1,4 @@
+# Future: HRA headers
+# This directory will hold the public API for Heap Reference Analysis:
+# AccessPath, HeapObject, Field, HRANode, HRAEdge, HRAState, HRAGraph.
+# See docs/project.md §10 and docs/design.md §§12–23.

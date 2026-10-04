@@ -1,0 +1,88 @@
+# MDE-HRA — C++/CMake project
+# Build artifacts and generated files only — source and documentation are tracked.
+
+# ---------------------------------------------------------------------------
+# CMake build tree
+# ---------------------------------------------------------------------------
+build/
+Build/
+BUILD/
+cmake-build-*/
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+CTestTestfile.cmake
+CTestCostData.txt
+Testing/
+install_manifest.txt
+_deps/
+
+# ---------------------------------------------------------------------------
+# Compiled binaries and object files
+# ---------------------------------------------------------------------------
+*.o
+*.obj
+*.a
+*.lib
+*.so
+*.so.*
+*.dylib
+*.dll
+*.exe
+*.pdb
+*.ilk
+*.exp
+
+# ---------------------------------------------------------------------------
+# IDE and editor artifacts
+# ---------------------------------------------------------------------------
+# Visual Studio / VS Code
+.vs/
+*.user
+*.suo
+*.sln.docinfo
+.vscode/settings.json
+.vscode/c_cpp_properties.json
+.vscode/launch.json
+.vscode/tasks.json
+
+# CLion / JetBrains
+.idea/
+cmake-build-debug/
+cmake-build-release/
+
+# Vim / Emacs
+*.swp
+*.swo
+*~
+\#*\#
+.\#*
+
+# ---------------------------------------------------------------------------
+# Python (for future scripts/)
+# ---------------------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.venv/
+venv/
+env/
+
+# ---------------------------------------------------------------------------
+# Temporary and system files
+# ---------------------------------------------------------------------------
+*.tmp
+*.temp
+*.bak
+*.orig
+Thumbs.db
+.DS_Store
+
+# ---------------------------------------------------------------------------
+# Experimental output (future phases)
+# ---------------------------------------------------------------------------
+results/
+output/
+*.csv
+*.json.out

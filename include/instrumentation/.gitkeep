@@ -1,0 +1,5 @@
+# Future: instrumentation headers
+# This directory will hold the public API for the metrics/measurement layer:
+# runtime, peak memory, node counts, deduplication ratio.
+# Instrumentation must remain observational (docs/decisions.md D24).
+# See docs/architecture.md §§20–21.
