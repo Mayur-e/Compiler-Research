@@ -1,0 +1,144 @@
+{
+  "schema_version": 1,
+  "generated": "2026-10-06",
+  "project": "MDE-HRA Research Prototype",
+  "phase": 11,
+  "environment": {
+    "os": "Windows (MSYS2/UCRT64)",
+    "toolchain": "GCC 16.2.0 (MSYS2 UCRT64)",
+    "llvm_clang_version": "22.1.8",
+    "cmake_version": "4.4.2",
+    "build_mode": "Ninja (default)",
+    "executable": "build/src/instr-driver.exe"
+  },
+  "repetition_policy": {
+    "reps": 10,
+    "warmup": "none",
+    "run_mode": "cold",
+    "run_id_field": "run_id in CSV (1..10)"
+  },
+  "benchmarks": [
+    {
+      "benchmark_id": "bm01",
+      "name": "simple_alloc",
+      "file": "experiments/benchmarks/bm01_simple_alloc.c",
+      "source_type": "synthetic",
+      "source_location": "N/A (project-internal)",
+      "license": "N/A",
+      "description": "Allocates two heap nodes, stores one pointer field, returns root. Minimal pointer manipulation.",
+      "categories": ["simple heap/pointer"],
+      "expected_supported": true,
+      "exclusion_reason": null
+    },
+    {
+      "benchmark_id": "bm02",
+      "name": "linked_list_build",
+      "file": "experiments/benchmarks/bm02_linked_list_build.c",
+      "source_type": "synthetic",
+      "source_location": "N/A (project-internal)",
+      "license": "N/A",
+      "description": "Builds a 3-node singly-linked list via multiple allocs and next-field stores.",
+      "categories": ["linked-list", "multiple heap objects"],
+      "expected_supported": true,
+      "exclusion_reason": null
+    },
+    {
+      "benchmark_id": "bm03",
+      "name": "dead_pointers",
+      "file": "experiments/benchmarks/bm03_dead_pointers.c",
+      "source_type": "synthetic",
+      "source_location": "N/A (project-internal)",
+      "license": "N/A",
+      "description": "Three allocations; two (t1, t2) are dead after allocation. Only result is live at return.",
+      "categories": ["dead-pointer-heavy"],
+      "expected_supported": true,
+      "exclusion_reason": null
+    },
+    {
+      "benchmark_id": "bm04",
+      "name": "aliasing",
+      "file": "experiments/benchmarks/bm04_aliasing.c",
+      "source_type": "synthetic",
+      "source_location": "N/A (project-internal)",
+      "license": "N/A",
+      "description": "Two variables alias one node. Field store via one alias, load via the other.",
+      "categories": ["aliasing", "shared-target"],
+      "expected_supported": true,
+      "exclusion_reason": null
+    },
+    {
+      "benchmark_id": "bm05",
+      "name": "branch_alloc",
+      "file": "experiments/benchmarks/bm05_branch_alloc.c",
+      "source_type": "synthetic",
+      "source_location": "N/A (project-internal)",
+      "license": "N/A",
+      "description": "If/else branch each allocates two nodes. Join point sees two possible HRA states.",
+      "categories": ["branch-heavy"],
+      "expected_supported": true,
+      "exclusion_reason": null
+    },
+    {
+      "benchmark_id": "bm06",
+      "name": "loop_list",
+      "file": "experiments/benchmarks/bm06_loop_list.c",
+      "source_type": "synthetic",
+      "source_location": "N/A (project-internal)",
+      "license": "N/A",
+      "description": "Unrolled chain of 3 field loads (p->next chain). Exercises load statement sequencing.",
+      "categories": ["loop-heavy", "field loads"],
+      "expected_supported": true,
+      "exclusion_reason": null
+    },
+    {
+      "benchmark_id": "bm07",
+      "name": "multi_field_graph",
+      "file": "experiments/benchmarks/bm07_multi_field_graph.c",
+      "source_type": "synthetic",
+      "source_location": "N/A (project-internal)",
+      "license": "N/A",
+      "description": "3 nodes linked bidirectionally via both next and prev fields. 1 dead alloc (tmp). Largest benchmark.",
+      "categories": ["multiple heap objects", "multi-field", "dead-pointer-heavy", "field loads", "field stores"],
+      "expected_supported": true,
+      "exclusion_reason": null
+    },
+    {
+      "benchmark_id": "bm08",
+      "name": "genuine_loop",
+      "file": "experiments/benchmarks/bm08_genuine_loop.c",
+      "source_type": "synthetic",
+      "source_location": "N/A (project-internal)",
+      "license": "N/A",
+      "description": "While-loop traversing a linked list. Features a genuine CFG back-edge and requires worklist fixpoint iterations.",
+      "categories": ["loop-heavy", "field loads"],
+      "expected_supported": true,
+      "exclusion_reason": null
+    }
+  ],
+  "excluded_candidates": [
+    {
+      "name": "free() usage",
+      "reason": "free() is not modelled by the HRA transfer function (mapped to UnknownStmt/ignored). Including programs with free() would produce misleading results. Documented limitation.",
+      "unsupported_feature": "free() / heap deallocation",
+      "observed_failure": "No explicit failure; free() silently becomes UnknownStmt, producing incorrect heap-shape results."
+    },
+    {
+      "name": "Pointer arithmetic",
+      "reason": "The frontend does not recognise pointer arithmetic (p+1, p++, p[i]) as field loads or stores. Such expressions are silently dropped.",
+      "unsupported_feature": "Pointer arithmetic / array indexing",
+      "observed_failure": "Statements dropped → IR incomplete."
+    },
+    {
+      "name": "Interprocedural call targets",
+      "reason": "The analysis is intraprocedural. Function calls that return heap objects (other than malloc/__builtin_malloc) are not modelled.",
+      "unsupported_feature": "Interprocedural analysis",
+      "observed_failure": "CallExpr targets other than malloc become dead statements."
+    },
+    {
+      "name": "Unions",
+      "reason": "Union field access is not handled by the frontend FieldDecl-based translation.",
+      "unsupported_feature": "C unions",
+      "observed_failure": "Not tested; excluded by design."
+    }
+  ]
+}

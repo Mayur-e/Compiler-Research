@@ -41,9 +41,20 @@ if(CMAKE_SOURCE_DIR STREQUAL CMAKE_BINARY_DIR)
 endif()
 
 # ---------------------------------------------------------------------------
-# Global include path — makes #include "mdehra/config.hpp" work everywhere
+# Find LLVM and Clang (Phase 2A integration)
+# ---------------------------------------------------------------------------
+find_package(LLVM REQUIRED CONFIG)
+message(STATUS "Found LLVM ${LLVM_PACKAGE_VERSION}")
+message(STATUS "Using LLVMConfig.cmake in: ${LLVM_DIR}")
+
+find_package(Clang REQUIRED CONFIG)
+message(STATUS "Found Clang ${Clang_VERSION}")
+
+# ---------------------------------------------------------------------------
+# Global include path
 # ---------------------------------------------------------------------------
 include_directories(${PROJECT_SOURCE_DIR}/include)
+
 
 # ---------------------------------------------------------------------------
 # Testing support via CTest

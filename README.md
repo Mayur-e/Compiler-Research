@@ -88,22 +88,39 @@ Project/
 
 ## Prerequisites
 
-| Tool | Version | Notes |
-|---|---|---|
-| C++ compiler | GCC 16.1.0 (MinGW-W64) or equivalent | C++17 required |
-| CMake | 4.4.3 or later | |
-| Ninja | 1.13.2 or later | Recommended generator on Windows |
-| Python | 3.11 or later | For future scripting |
-| Git | any | Version control |
+This project requires a modern C++17 compiler and the LLVM/Clang development libraries to parse C source code via Clang LibTooling.
 
-> **Windows note:** Two MinGW installations may be present on the PATH (`C:\MinGW\bin` GCC 6.3.0 and `D:\mingw64\bin` GCC 16.1.0).  
-> CMake should use the newer one. If CMake selects the wrong compiler, override explicitly:
->
-> ```powershell
-> cmake -S . -B build -G Ninja `
->       -DCMAKE_C_COMPILER="D:\mingw64\bin\gcc.exe" `
->       -DCMAKE_CXX_COMPILER="D:\mingw64\bin\g++.exe"
-> ```
+**Current Environment Status (Phase 2A Inspection):**
+- Native MSVC / Visual Studio is NOT installed.
+- Native LLVM/Clang is NOT installed.
+- MSYS2 is NOT installed.
+- The `D:\mingw64` GCC 16.1.0 installation is incomplete and broken.
+- The `C:\MinGW` GCC 6.3.0 installation works but lacks complete C++17 support and Clang integration.
+
+**Recommended Setup:**
+Because we rely on LLVM/Clang LibTooling, the recommended development environment on Windows is **MSYS2** using the **UCRT64** environment.
+
+### 1. Windows Host Setup (MSYS2 Installation)
+1. Download and install MSYS2 from [msys2.org](https://www.msys2.org/).
+2. **IMPORTANT:** Install MSYS2 on the **D drive** (e.g., `D:\msys64`) as the C drive is full.
+3. Once installed, open the **MSYS2 UCRT64** terminal (not the default MSYS or MINGW64 terminal).
+
+### 2. MSYS2 Environment Setup (UCRT64)
+Inside the **MSYS2 UCRT64** terminal, install the required compiler, LLVM/Clang libraries, and build tools:
+
+```bash
+pacman -S mingw-w64-ucrt-x86_64-toolchain \
+          mingw-w64-ucrt-x86_64-clang \
+          mingw-w64-ucrt-x86_64-llvm \
+          mingw-w64-ucrt-x86_64-cmake \
+          mingw-w64-ucrt-x86_64-ninja
+```
+
+This will provide:
+- `clang++` and `g++` (modern C++17/C++20 capable)
+- LLVM and Clang development headers/libraries
+- Modern CMake
+- Ninja build system
 
 ---
 

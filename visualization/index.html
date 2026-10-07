@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HRA/MDE Developer Visualizer</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/svg-pan-zoom@3.6.1/dist/svg-pan-zoom.min.js"></script>
+    <style>
+        body { font-family: 'Segoe UI', Consolas, monospace; background: #1e1e1e; color: #d4d4d4; margin: 0; padding: 15px; display: flex; flex-direction: column; min-height: 100vh; box-sizing: border-box; overflow-y: auto; }
+        h2, h3 { color: #569cd6; margin: 0 0 10px 0; font-size: 1.1em; text-transform: uppercase; border-bottom: 1px solid #3c3c3c; padding-bottom: 5px; }
+        
+        #mainPanels { padding-right: 10px; display: flex; flex-direction: column; }
+        
+        .row { display: flex; flex-wrap: wrap; gap: 15px; margin-bottom: 15px; }
+        .panel { 
+            background: #252526; 
+            border: 1px solid #3c3c3c; 
+            padding: 10px; 
+            flex: 1 1 calc(50% - 15px); 
+            min-width: 400px; 
+            display: flex; 
+            flex-direction: column; 
+            min-height: 350px; 
+            max-height: 500px;
+        }
+        .panel-full { flex: 1 1 100%; min-height: auto; max-height: none; }
+        .panel-content { flex: 1; overflow: auto; position: relative; }
+        
+        button { background: #0e639c; color: white; border: none; padding: 6px 12px; margin-right: 5px; cursor: pointer; border-radius: 3px; font-weight: bold; }
+        button:hover { background: #1177bb; }
+        button:disabled { background: #4d4d4d; color: #a3a3a3; cursor: not-allowed; }
+        
+        #pipeline-indicator { display: flex; gap: 10px; margin-top: 10px; font-weight: bold; align-items: center; }
+        .stage { padding: 4px 8px; border-radius: 3px; color: #666; font-size: 0.9em; }
+        .stage.active { color: #fff; background: #007acc; }
+
+        .cfg-node { margin-bottom: 10px; border-left: 3px solid #555; padding-left: 8px; }
+        .cfg-node.active { border-left-color: #569cd6; background: rgba(86,156,214,0.1); }
+        .cfg-stmt { padding: 3px 5px; margin: 2px 0; font-family: Consolas, monospace; border-radius: 3px; }
+        .cfg-stmt.active { background: #094771; color: #fff; }
+        .cfg-stmt.pruned { color: #808080; text-decoration: line-through; }
+        
+        .badge { display: inline-block; padding: 2px 5px; border-radius: 3px; font-size: 0.75em; margin-left: 5px; font-weight: bold; }
+        .badge-live { background: #388a34; color: white; }
+        .badge-pruned { background: #808080; color: white; }
+        
+        .diff-add { color: #4ec9b0; }
+        .diff-sub { color: #f48771; }
+
+        pre { margin: 0; font-family: Consolas, monospace; white-space: pre-wrap; font-size: 0.95em; }
+        
+        .graph-container { background: #fff; width: 100%; height: 100%; border-radius: 3px; overflow: hidden; position: relative; }
+        .graph-tools { position: absolute; top: 10px; right: 10px; z-index: 10; display: flex; gap: 5px; }
+        .graph-tools button { background: rgba(0,0,0,0.6); padding: 4px 8px; margin: 0; font-size: 0.8em; }
+        .graph-tools button:hover { background: rgba(0,0,0,0.8); }
+
+        table { border-collapse: collapse; width: 100%; font-size: 0.9em; }
+        th, td { border: 1px solid #3c3c3c; padding: 6px; text-align: left; }
+        th { background: #2d2d30; color: #ccc; }
+        
+        .log-entry { padding: 4px 6px; cursor: pointer; border-bottom: 1px solid #333; font-family: Consolas, monospace; font-size: 0.9em; }
+        .log-entry:hover { background: #2a2d2e; }
+        .log-entry.active { background: #094771; color: #fff; border-left: 3px solid #569cd6; }
+        
+        /* Inspector Key-Value styles */
+        .kv-pair { margin-bottom: 8px; }
+        .kv-key { color: #9cdcfe; font-weight: bold; display: block; font-size: 0.9em; margin-bottom: 2px; }
+        .kv-val { padding-left: 10px; font-family: Consolas, monospace; }
+        
+    </style>
+</head>
+<body>
+
+    <!-- TOP: Controls and Current Event -->
+    <div class="panel panel-full" style="flex: 0 0 auto; margin-bottom: 15px;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+            <div>
+                <h2 style="border: none;">HRA/MDE Developer Trace Visualizer</h2>
+                <input type="file" id="traceFile" accept=".json" style="margin-bottom: 10px;">
+                <div id="loadStatus" style="font-weight: bold; color: #4ec9b0;"></div>
+                
+                <div id="traceControls" style="display: none; margin-top: 10px;">
+                    <button id="btnFirst">|&lt; First</button>
+                    <button id="btnPrev">&lt; Prev</button>
+                    <button id="btnStep">Step &gt;</button>
+                    <button id="btnNext">Next &gt;</button>
+                    <button id="btnLast">Last &gt;|</button>
+                    <button id="btnRun">Run to Fixpoint</button>
+                    <button id="btnReset" style="background: #a31515;">Reset</button>
+                    <span id="stepCounter" style="font-weight: bold; color: #ce9178; margin-left: 15px; font-size: 1.1em;"></span>
+                </div>
+                
+                <div id="pipeline-indicator" style="display: none;">
+                    <div class="stage" id="stage-cfg">CFG</div> ➜
+                    <div class="stage" id="stage-ir">IR</div> ➜
+                    <div class="stage" id="stage-liveness">Liveness</div> ➜
+                    <div class="stage" id="stage-hra">HRA</div> ➜
+                    <div class="stage" id="stage-mde">MDE</div> ➜
+                    <div class="stage" id="stage-fixpoint">Fixpoint</div>
+                </div>
+            </div>
+            
+            <div id="currentEventPanel" style="display: none; background: #1e1e1e; padding: 10px; border: 1px solid #007acc; border-radius: 4px; width: 400px; font-size: 0.9em;">
+                <div style="font-weight: bold; color: #007acc; margin-bottom: 8px; border-bottom: 1px solid #333; padding-bottom: 4px;">CURRENT EVENT INSPECTOR</div>
+                <div id="ce-content">No event selected.</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="mainPanels" style="display: none;">
+        
+        <!-- ROW 1: CFG / IR -->
+        <div class="row">
+            <div class="panel">
+                <h3>ACTUAL CFG GRAPH</h3>
+                <div class="panel-content graph-container">
+                    <div class="graph-tools">
+                        <button onclick="cfgZoom.zoomIn()">+</button>
+                        <button onclick="cfgZoom.zoomOut()">-</button>
+                        <button onclick="cfgZoom.fit()">Fit</button>
+                        <button onclick="cfgZoom.reset()">Reset</button>
+                    </div>
+                    <div id="mermaid-cfg" style="width:100%; height:100%;"></div>
+                </div>
+            </div>
+            <div class="panel">
+                <h3>SOURCE/IR</h3>
+                <div class="panel-content" id="cfgView"></div>
+            </div>
+        </div>
+        
+        <!-- ROW 2: HRA HEAP / TEXTUAL + DIFF -->
+        <div class="row">
+            <div class="panel">
+                <h3>REAL HRA HEAP GRAPH</h3>
+                <div class="panel-content graph-container">
+                    <div class="graph-tools">
+                        <button onclick="hraZoom.zoomIn()">+</button>
+                        <button onclick="hraZoom.zoomOut()">-</button>
+                        <button onclick="hraZoom.fit()">Fit</button>
+                        <button onclick="hraZoom.reset()">Reset</button>
+                    </div>
+                    <div id="mermaid-hra" style="width:100%; height:100%;">No state.</div>
+                </div>
+            </div>
+            <div class="panel">
+                <h3>HRA TEXTUAL STATE & STATE DIFF</h3>
+                <div class="panel-content" style="display: flex; flex-direction: column;">
+                    <div style="flex: 1; border-bottom: 1px solid #3c3c3c; padding-bottom: 10px; margin-bottom: 10px; overflow-y: auto;">
+                        <pre id="graphView">No state.</pre>
+                    </div>
+                    <div style="flex: 1; overflow-y: auto;">
+                        <div class="kv-key">STATE DIFF</div>
+                        <pre id="stateDiffView">No changes.</pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- ROW 3: LIVENESS / WORKLIST -->
+        <div class="row">
+            <div class="panel">
+                <h3>LIVENESS DETAILS</h3>
+                <div class="panel-content" id="livenessView">Not available.</div>
+            </div>
+            <div class="panel">
+                <h3>REAL WORKLIST QUEUE</h3>
+                <div class="panel-content" id="worklistView">Queue empty.</div>
+            </div>
+        </div>
+        
+        <!-- ROW 4: MDE / CAUSALITY -->
+        <div class="row">
+            <div class="panel" id="mdeViewPanel">
+                <h3>MDE CANONICALIZATION INSPECTOR</h3>
+                <div class="panel-content" id="mdeLog">No MDE events.</div>
+            </div>
+            <div class="panel">
+                <h3>EVENT CAUSALITY INSPECTOR</h3>
+                <div class="panel-content" id="causalityView">No event selected.</div>
+            </div>
+        </div>
+        
+        <!-- BOTTOM: STATS / LOG -->
+        <div class="row">
+            <div class="panel" style="min-height: 250px;">
+                <h3>SUMMARY STATISTICS</h3>
+                <div class="panel-content">
+                    <table id="statsTable"></table>
+                </div>
+            </div>
+            <div class="panel" style="min-height: 250px;">
+                <h3>RAW EVENT LOG</h3>
+                <div class="panel-content" id="eventLog"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

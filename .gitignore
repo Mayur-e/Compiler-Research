@@ -86,3 +86,6 @@ results/
 output/
 *.csv
 *.json.out
+*.log
+InstallationLog.txt
+visualization/*_trace.json
