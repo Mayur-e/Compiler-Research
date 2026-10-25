@@ -1,0 +1,213 @@
+{
+  "domain_note": "CONCRETE_RUNTIME and STATIC_ANALYSIS are separate domains. Concrete addresses != abstract NodeIDs. alloc_site_map is visualization-only and does not modify HRA semantics.",
+  "benchmark": "BM03",
+  "summary": {
+    "matched_count": 4,
+    "unmatched_count": 3,
+    "ambiguous_count": 0,
+    "not_applicable_count": 4,
+    "concrete_only_count": 7,
+    "static_only_count": 0
+  },
+  "runtime_stats": {
+    "domain": "CONCRETE_RUNTIME",
+    "loop_iterations": 0,
+    "malloc_count": 3,
+    "branch_count": 0
+  },
+  "static_stats": {
+    "domain": "STATIC_ANALYSIS",
+    "worklist_iters_A": 3,
+    "worklist_iters_B": 3,
+    "worklist_iters_C": 3,
+    "transfers_A": 4,
+    "transfers_B": 2,
+    "transfers_C": 2,
+    "pruned_B": 2,
+    "pruned_C": 2,
+    "mde_hits": 4,
+    "mde_misses": 2
+  },
+  "alloc_site_map": [
+    {"concrete_addr":"0x2a70ee9a6f0","alloc_site":1,"abstract_node":"N1","visualization_only":true},
+    {"concrete_addr":"0x2a70ee9a710","alloc_site":2,"abstract_node":"N2","visualization_only":true},
+    {"concrete_addr":"0x2a70ee9ce00","alloc_site":3,"abstract_node":"N3","visualization_only":true}
+  ],
+  "all_concrete": [
+    {"type":"RT_PROGRAM_START","stmt_id":0,"line":0,"func_name":"bm03_dead_pointers","var_name":"null","field_name":"null","addr":"0x0","addr2":"0x0","size":0,"alloc_site":0,"branch_taken":0,"loop_iter":0},
+    {"type":"RT_FUNCTION_ENTER","stmt_id":0,"line":18,"func_name":"bm03_dead_pointers","var_name":"null","field_name":"null","addr":"0x0","addr2":"0x0","size":0,"alloc_site":0,"branch_taken":0,"loop_iter":0},
+    {"type":"RT_MALLOC","stmt_id":1,"line":22,"func_name":"bm03_dead_pointers","var_name":"t1","field_name":"null","addr":"0x2a70ee9a6f0","addr2":"0x0","size":8,"alloc_site":1,"branch_taken":0,"loop_iter":0},
+    {"type":"RT_PTR_ASSIGN","stmt_id":1,"line":22,"func_name":"bm03_dead_pointers","var_name":"t1","field_name":"null","addr":"0x2a70ee9a6f0","addr2":"0x0","size":0,"alloc_site":0,"branch_taken":0,"loop_iter":0},
+    {"type":"RT_MALLOC","stmt_id":2,"line":23,"func_name":"bm03_dead_pointers","var_name":"t2","field_name":"null","addr":"0x2a70ee9a710","addr2":"0x0","size":8,"alloc_site":2,"branch_taken":0,"loop_iter":0},
+    {"type":"RT_PTR_ASSIGN","stmt_id":2,"line":23,"func_name":"bm03_dead_pointers","var_name":"t2","field_name":"null","addr":"0x2a70ee9a710","addr2":"0x0","size":0,"alloc_site":0,"branch_taken":0,"loop_iter":0},
+    {"type":"RT_MALLOC","stmt_id":3,"line":24,"func_name":"bm03_dead_pointers","var_name":"result","field_name":"null","addr":"0x2a70ee9ce00","addr2":"0x0","size":8,"alloc_site":3,"branch_taken":0,"loop_iter":0},
+    {"type":"RT_PTR_ASSIGN","stmt_id":3,"line":24,"func_name":"bm03_dead_pointers","var_name":"result","field_name":"null","addr":"0x2a70ee9ce00","addr2":"0x0","size":0,"alloc_site":0,"branch_taken":0,"loop_iter":0},
+    {"type":"RT_RETURN","stmt_id":4,"line":25,"func_name":"bm03_dead_pointers","var_name":"return","field_name":"null","addr":"0x2a70ee9ce00","addr2":"0x0","size":0,"alloc_site":0,"branch_taken":0,"loop_iter":0},
+    {"type":"RT_FUNCTION_EXIT","stmt_id":0,"line":25,"func_name":"bm03_dead_pointers","var_name":"null","field_name":"null","addr":"0x0","addr2":"0x0","size":0,"alloc_site":0,"branch_taken":0,"loop_iter":0},
+    {"type":"RT_PROGRAM_END","stmt_id":0,"line":0,"func_name":"null","var_name":"null","field_name":"null","addr":"0x0","addr2":"0x0","size":0,"alloc_site":0,"branch_taken":0,"loop_iter":0}
+  ],
+  "concrete_only": [
+    {"type":"RT_PROGRAM_START","stmt_id":0,"line":0,"var_name":"null","field_name":"null","addr":"0x0","addr2":"0x0","alloc_site":0},
+    {"type":"RT_FUNCTION_ENTER","stmt_id":0,"line":18,"var_name":"null","field_name":"null","addr":"0x0","addr2":"0x0","alloc_site":0},
+    {"type":"RT_PTR_ASSIGN","stmt_id":1,"line":22,"var_name":"t1","field_name":"null","addr":"0x2a70ee9a6f0","addr2":"0x0","alloc_site":0},
+    {"type":"RT_PTR_ASSIGN","stmt_id":2,"line":23,"var_name":"t2","field_name":"null","addr":"0x2a70ee9a710","addr2":"0x0","alloc_site":0},
+    {"type":"RT_PTR_ASSIGN","stmt_id":3,"line":24,"var_name":"result","field_name":"null","addr":"0x2a70ee9ce00","addr2":"0x0","alloc_site":0},
+    {"type":"RT_FUNCTION_EXIT","stmt_id":0,"line":25,"var_name":"null","field_name":"null","addr":"0x0","addr2":"0x0","alloc_site":0},
+    {"type":"RT_PROGRAM_END","stmt_id":0,"line":0,"var_name":"null","field_name":"null","addr":"0x0","addr2":"0x0","alloc_site":0}
+  ],
+  "static_only": [
+
+  ],
+  "correlated_events": [
+    {
+      "line": 0,
+      "stmt_id": 0,
+      "occurrence_index": 1,
+      "operation": "program_start",
+      "correlation_status": "NOT_APPLICABLE_TO_STATIC_ANALYSIS",
+      "is_concrete_only": true,
+      "is_static_only": false,
+      "concrete": {"type":"RT_PROGRAM_START","var":"null","addr":"0x0","addr2":"0x0","field":"null","alloc_site":0,"branch_taken":0,"loop_iter":0},
+      "static_A": null,
+      "static_B": null,
+      "static_C": null
+    },
+    {
+      "line": 18,
+      "stmt_id": 0,
+      "occurrence_index": 1,
+      "operation": "function_enter",
+      "correlation_status": "NOT_APPLICABLE_TO_STATIC_ANALYSIS",
+      "is_concrete_only": true,
+      "is_static_only": false,
+      "concrete": {"type":"RT_FUNCTION_ENTER","var":"null","addr":"0x0","addr2":"0x0","field":"null","alloc_site":0,"branch_taken":0,"loop_iter":0},
+      "static_A": null,
+      "static_B": null,
+      "static_C": null
+    },
+    {
+      "line": 22,
+      "stmt_id": 1,
+      "occurrence_index": 1,
+      "operation": "alloc",
+      "correlation_status": "MATCHED",
+      "is_concrete_only": false,
+      "is_static_only": false,
+      "concrete": {"type":"RT_MALLOC","var":"t1","addr":"0x2a70ee9a6f0","addr2":"0x0","field":"null","alloc_site":1,"branch_taken":0,"loop_iter":0},
+      "static_A": {"type":"StmtPost","stmt":"t1* = alloc#1","pruned":false,"mde_hit":false,"mde_index":-1,"state":{"bindings":{"t1":[1]},"nodes":[1],"edges":[]}},
+      "static_B": {"type":"StmtPost","stmt":"t1* = alloc#1","pruned":true,"mde_hit":false,"mde_index":-1,"state":{"bindings":{},"nodes":[],"edges":[]}},
+      "static_C": {"type":"StmtPost","stmt":"t1* = alloc#1","pruned":true,"mde_hit":false,"mde_index":-1,"state":{"bindings":{},"nodes":[],"edges":[]}},
+      "alloc_correlation": {"concrete_addr":"0x2a70ee9a6f0","alloc_site":1,"abstract_node":"N1","visualization_only":true}
+    },
+    {
+      "line": 22,
+      "stmt_id": 1,
+      "occurrence_index": 1,
+      "operation": "assign",
+      "correlation_status": "UNMATCHED",
+      "is_concrete_only": true,
+      "is_static_only": false,
+      "concrete": {"type":"RT_PTR_ASSIGN","var":"t1","addr":"0x2a70ee9a6f0","addr2":"0x0","field":"null","alloc_site":0,"branch_taken":0,"loop_iter":0},
+      "static_A": null,
+      "static_B": null,
+      "static_C": null,
+      "alloc_correlation": {"concrete_addr":"0x2a70ee9a6f0","alloc_site":1,"abstract_node":"N1","visualization_only":true}
+    },
+    {
+      "line": 23,
+      "stmt_id": 2,
+      "occurrence_index": 1,
+      "operation": "alloc",
+      "correlation_status": "MATCHED",
+      "is_concrete_only": false,
+      "is_static_only": false,
+      "concrete": {"type":"RT_MALLOC","var":"t2","addr":"0x2a70ee9a710","addr2":"0x0","field":"null","alloc_site":2,"branch_taken":0,"loop_iter":0},
+      "static_A": {"type":"StmtPost","stmt":"t2* = alloc#2","pruned":false,"mde_hit":false,"mde_index":-1,"state":{"bindings":{"t1":[1],"t2":[2]},"nodes":[1,2],"edges":[]}},
+      "static_B": {"type":"StmtPost","stmt":"t2* = alloc#2","pruned":true,"mde_hit":false,"mde_index":-1,"state":{"bindings":{},"nodes":[],"edges":[]}},
+      "static_C": {"type":"StmtPost","stmt":"t2* = alloc#2","pruned":true,"mde_hit":false,"mde_index":-1,"state":{"bindings":{},"nodes":[],"edges":[]}},
+      "alloc_correlation": {"concrete_addr":"0x2a70ee9a710","alloc_site":2,"abstract_node":"N2","visualization_only":true}
+    },
+    {
+      "line": 23,
+      "stmt_id": 2,
+      "occurrence_index": 1,
+      "operation": "assign",
+      "correlation_status": "UNMATCHED",
+      "is_concrete_only": true,
+      "is_static_only": false,
+      "concrete": {"type":"RT_PTR_ASSIGN","var":"t2","addr":"0x2a70ee9a710","addr2":"0x0","field":"null","alloc_site":0,"branch_taken":0,"loop_iter":0},
+      "static_A": null,
+      "static_B": null,
+      "static_C": null,
+      "alloc_correlation": {"concrete_addr":"0x2a70ee9a710","alloc_site":2,"abstract_node":"N2","visualization_only":true}
+    },
+    {
+      "line": 24,
+      "stmt_id": 3,
+      "occurrence_index": 1,
+      "operation": "alloc",
+      "correlation_status": "MATCHED",
+      "is_concrete_only": false,
+      "is_static_only": false,
+      "concrete": {"type":"RT_MALLOC","var":"result","addr":"0x2a70ee9ce00","addr2":"0x0","field":"null","alloc_site":3,"branch_taken":0,"loop_iter":0},
+      "static_A": {"type":"StmtPost","stmt":"result* = alloc#3","pruned":false,"mde_hit":false,"mde_index":-1,"state":{"bindings":{"result":[3],"t1":[1],"t2":[2]},"nodes":[1,2,3],"edges":[]}},
+      "static_B": {"type":"StmtPost","stmt":"result* = alloc#3","pruned":false,"mde_hit":false,"mde_index":-1,"state":{"bindings":{"result":[3]},"nodes":[3],"edges":[]}},
+      "static_C": {"type":"StmtPost","stmt":"result* = alloc#3","pruned":false,"mde_hit":false,"mde_index":-1,"state":{"bindings":{"result":[3]},"nodes":[3],"edges":[]}},
+      "alloc_correlation": {"concrete_addr":"0x2a70ee9ce00","alloc_site":3,"abstract_node":"N3","visualization_only":true}
+    },
+    {
+      "line": 24,
+      "stmt_id": 3,
+      "occurrence_index": 1,
+      "operation": "assign",
+      "correlation_status": "UNMATCHED",
+      "is_concrete_only": true,
+      "is_static_only": false,
+      "concrete": {"type":"RT_PTR_ASSIGN","var":"result","addr":"0x2a70ee9ce00","addr2":"0x0","field":"null","alloc_site":0,"branch_taken":0,"loop_iter":0},
+      "static_A": null,
+      "static_B": null,
+      "static_C": null,
+      "alloc_correlation": {"concrete_addr":"0x2a70ee9ce00","alloc_site":3,"abstract_node":"N3","visualization_only":true}
+    },
+    {
+      "line": 25,
+      "stmt_id": 4,
+      "occurrence_index": 1,
+      "operation": "return",
+      "correlation_status": "MATCHED",
+      "is_concrete_only": false,
+      "is_static_only": false,
+      "concrete": {"type":"RT_RETURN","var":"return","addr":"0x2a70ee9ce00","addr2":"0x0","field":"null","alloc_site":0,"branch_taken":0,"loop_iter":0},
+      "static_A": {"type":"StmtPost","stmt":"return result*","pruned":false,"mde_hit":false,"mde_index":-1,"state":{"bindings":{"result":[3],"t1":[1],"t2":[2]},"nodes":[1,2,3],"edges":[]}},
+      "static_B": {"type":"StmtPost","stmt":"return result*","pruned":false,"mde_hit":false,"mde_index":-1,"state":{"bindings":{"result":[3]},"nodes":[3],"edges":[]}},
+      "static_C": {"type":"StmtPost","stmt":"return result*","pruned":false,"mde_hit":false,"mde_index":-1,"state":{"bindings":{"result":[3]},"nodes":[3],"edges":[]}},
+      "alloc_correlation": {"concrete_addr":"0x2a70ee9ce00","alloc_site":3,"abstract_node":"N3","visualization_only":true}
+    },
+    {
+      "line": 25,
+      "stmt_id": 0,
+      "occurrence_index": 1,
+      "operation": "function_exit",
+      "correlation_status": "NOT_APPLICABLE_TO_STATIC_ANALYSIS",
+      "is_concrete_only": true,
+      "is_static_only": false,
+      "concrete": {"type":"RT_FUNCTION_EXIT","var":"null","addr":"0x0","addr2":"0x0","field":"null","alloc_site":0,"branch_taken":0,"loop_iter":0},
+      "static_A": null,
+      "static_B": null,
+      "static_C": null
+    },
+    {
+      "line": 0,
+      "stmt_id": 0,
+      "occurrence_index": 1,
+      "operation": "program_end",
+      "correlation_status": "NOT_APPLICABLE_TO_STATIC_ANALYSIS",
+      "is_concrete_only": true,
+      "is_static_only": false,
+      "concrete": {"type":"RT_PROGRAM_END","var":"null","addr":"0x0","addr2":"0x0","field":"null","alloc_site":0,"branch_taken":0,"loop_iter":0},
+      "static_A": null,
+      "static_B": null,
+      "static_C": null
+    }
+  ]
+}

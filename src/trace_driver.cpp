@@ -315,35 +315,41 @@ int main(int argc, char** argv) {
         std::cerr << "Invalid config type\n";
         return 1;
     }
+    std::string outputFile = (argc > 3) ? argv[3] : "";
+    std::ofstream ofs;
+    if (!outputFile.empty()) {
+        ofs.open(outputFile);
+    }
+    std::ostream& out = ofs.is_open() ? ofs : std::cout;
+
+    out << "{";
+    out << "\"config\": \"" << configType << "\", ";
+    out << "\"cfg\": " << cfgToJSON(*funcToTest) << ", ";
+    out << "\"liveness\": " << livenessToJSON(*funcToTest, livenessRes) << ", ";
     
-    std::cout << "{";
-    std::cout << "\"config\": \"" << configType << "\", ";
-    std::cout << "\"cfg\": " << cfgToJSON(*funcToTest) << ", ";
-    std::cout << "\"liveness\": " << livenessToJSON(*funcToTest, livenessRes) << ", ";
+    out << "\"stats\": {";
+    out << "\"transfers\": " << stats.transfersExecuted << ", ";
+    out << "\"statementsExamined\": " << stats.statementsExamined << ", ";
+    out << "\"statementsPruned\": " << stats.statementsPruned << ", ";
+    out << "\"bindingsRemoved\": " << stats.bindingsRemoved << ", ";
+    out << "\"worklistIterations\": " << stats.worklistIterations << ", ";
+    out << "\"statesConstructed\": " << stats.statesConstructed << ", ";
+    out << "\"canonicalCalls\": " << stats.canonicalizeCalls << ", ";
+    out << "\"canonicalNew\": " << stats.newCanonicalStates << ", ";
+    out << "\"canonicalReused\": " << stats.reusedCanonicalStates << ", ";
+    out << "\"mdeHits\": " << mdeHits << ", ";
+    out << "\"mdeMisses\": " << mdeMisses;
+    out << "}, ";
     
-    std::cout << "\"stats\": {";
-    std::cout << "\"transfers\": " << stats.transfersExecuted << ", ";
-    std::cout << "\"statementsExamined\": " << stats.statementsExamined << ", ";
-    std::cout << "\"statementsPruned\": " << stats.statementsPruned << ", ";
-    std::cout << "\"bindingsRemoved\": " << stats.bindingsRemoved << ", ";
-    std::cout << "\"worklistIterations\": " << stats.worklistIterations << ", ";
-    std::cout << "\"statesConstructed\": " << stats.statesConstructed << ", ";
-    std::cout << "\"canonicalCalls\": " << stats.canonicalizeCalls << ", ";
-    std::cout << "\"canonicalNew\": " << stats.newCanonicalStates << ", ";
-    std::cout << "\"canonicalReused\": " << stats.reusedCanonicalStates << ", ";
-    std::cout << "\"mdeHits\": " << mdeHits << ", ";
-    std::cout << "\"mdeMisses\": " << mdeMisses;
-    std::cout << "}, ";
-    
-    std::cout << "\"trace\": [";
+    out << "\"trace\": [";
     bool firstEv = true;
     for (const auto& ev : traceEvents) {
-        if (!firstEv) std::cout << ", ";
+        if (!firstEv) out << ", ";
         firstEv = false;
-        std::cout << ev;
+        out << ev;
     }
-    std::cout << "]";
-    std::cout << "}\n";
+    out << "]";
+    out << "}\n";
     
     return 0;
 }

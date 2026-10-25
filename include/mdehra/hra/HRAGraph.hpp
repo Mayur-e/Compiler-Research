@@ -42,6 +42,16 @@ struct HRAGraph {
         edges.insert({src, f, tgt});
     }
 
+    void removeEdges(NodeID src, const ir::Field& f) {
+        for (auto it = edges.begin(); it != edges.end(); ) {
+            if (it->source == src && it->field == f) {
+                it = edges.erase(it);
+            } else {
+                ++it;
+            }
+        }
+    }
+
     void merge(const HRAGraph& other) {
         nodes.insert(other.nodes.begin(), other.nodes.end());
         edges.insert(other.edges.begin(), other.edges.end());

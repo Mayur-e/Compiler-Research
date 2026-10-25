@@ -19,7 +19,11 @@ void Printer::print(std::ostream& os, const Statement& stmt) {
             const auto& s = static_cast<const AssignStmt&>(stmt);
             print(os, s.dest);
             os << " = ";
-            print(os, s.src);
+            if (s.isNull) {
+                os << "null";
+            } else {
+                print(os, s.src);
+            }
             break;
         }
         case StmtType::Load: {
@@ -37,7 +41,11 @@ void Printer::print(std::ostream& os, const Statement& stmt) {
             os << "->";
             print(os, s.field);
             os << " = ";
-            print(os, s.value);
+            if (s.isNull) {
+                os << "null";
+            } else {
+                print(os, s.value);
+            }
             break;
         }
         case StmtType::Alloc: {
@@ -56,11 +64,18 @@ void Printer::print(std::ostream& os, const Statement& stmt) {
             break;
         }
         case StmtType::Call: {
-            os << "call(...)";
+            const auto& s = static_cast<const CallStmt&>(stmt);
+            os << s.calleeName << "(";
+            for (size_t i = 0; i < s.arguments.size(); ++i) {
+                if (i > 0) os << ", ";
+                print(os, s.arguments[i]);
+            }
+            os << ")";
             break;
         }
         case StmtType::Unknown: {
-            os << "unknown_stmt";
+            const auto& s = static_cast<const UnknownStmt&>(stmt);
+            os << (s.description.empty() ? "unknown_stmt" : s.description);
             break;
         }
     }

@@ -25,6 +25,9 @@ void HRASolver::run(const ir::Function& func, HRAConfig* config) {
         if (config) {
             config->getStats().worklistIterations++;
             config->getStats().blocksProcessed++;
+            // Phase 15: high-water mark for worklist
+            if (worklist.size() > config->getStats().peakWorklistSize)
+                config->getStats().peakWorklistSize = worklist.size();
         }
         ir::ID blockId = worklist.front();
         worklist.pop_front();
@@ -72,11 +75,20 @@ void HRASolver::run(const ir::Function& func, HRAConfig* config) {
                     worklist.push_back(succId);
                     inWorklist.insert(succId);
                     if (config) config->traceWorklistPush(succId, worklist);
+                    // Phase 15: track peak after push
+                    if (config && worklist.size() > config->getStats().peakWorklistSize)
+                        config->getStats().peakWorklistSize = worklist.size();
                 }
             }
         }
         
-        if (config) config->traceBlockExit(blockId, *canonicalExit);
+        if (config) {
+            config->traceBlockExit(blockId, *canonicalExit);
+            // Phase 15: peak heap nodes
+            size_t nodeCount = canonicalExit->graph.nodes.size();
+            if (nodeCount > config->getStats().peakHeapNodes)
+                config->getStats().peakHeapNodes = nodeCount;
+        }
     }
 }
 
@@ -86,6 +98,27 @@ std::shared_ptr<const hra::HRAState> HRASolver::getBlockEntryState(ir::ID blockI
 
 std::shared_ptr<const hra::HRAState> HRASolver::getBlockExitState(ir::ID blockId) const {
     return exitStates.at(blockId);
+}
+
+std::shared_ptr<const hra::HRAState> HRASolver::getFunctionExitState(const ir::Function& func) const {
+    hra::HRAState merged;
+    bool found = false;
+    for (const auto& kv : func.blocks) {
+        if (kv.second.successors.empty()) {
+            auto it = exitStates.find(kv.first);
+            if (it != exitStates.end() && it->second) {
+                merged.merge(*(it->second));
+                found = true;
+            }
+        }
+    }
+    if (!found) {
+        if (!exitStates.empty()) {
+            return exitStates.rbegin()->second;
+        }
+        return nullptr;
+    }
+    return std::make_shared<hra::HRAState>(std::move(merged));
 }
 
 hra::HRAState HRASolver::transferBlock(const ir::BasicBlock& block, const hra::HRAState& inState, HRAConfig* config) {
@@ -126,7 +159,11 @@ void HRASolver::transferStatement(const ir::Statement* stmt, hra::HRAState& stat
         case ir::StmtType::Assign: {
             if (config) config->getStats().assignsProcessed++;
             const auto* assignStmt = static_cast<const ir::AssignStmt*>(stmt);
-            state.bindings[assignStmt->dest] = state.bindings[assignStmt->src];
+            if (assignStmt->isNull) {
+                state.bindings[assignStmt->dest].clear();
+            } else {
+                state.bindings[assignStmt->dest] = state.bindings[assignStmt->src];
+            }
             break;
         }
         case ir::StmtType::Load: {
@@ -151,14 +188,21 @@ void HRASolver::transferStatement(const ir::Statement* stmt, hra::HRAState& stat
             if (config) config->getStats().storesProcessed++;
             const auto* storeStmt = static_cast<const ir::StoreStmt*>(stmt);
             auto pIt = state.bindings.find(storeStmt->base);
-            auto qIt = state.bindings.find(storeStmt->value);
-            
-            if (pIt != state.bindings.end() && qIt != state.bindings.end()) {
+            if (pIt != state.bindings.end()) {
                 const auto& pNodes = pIt->second;
-                const auto& qNodes = qIt->second;
-                for (auto pNode : pNodes) {
-                    for (auto qNode : qNodes) {
-                        state.graph.addEdge(pNode, storeStmt->field, qNode);
+                if (storeStmt->isNull) {
+                    for (auto pNode : pNodes) {
+                        state.graph.removeEdges(pNode, storeStmt->field);
+                    }
+                } else {
+                    auto qIt = state.bindings.find(storeStmt->value);
+                    if (qIt != state.bindings.end()) {
+                        const auto& qNodes = qIt->second;
+                        for (auto pNode : pNodes) {
+                            for (auto qNode : qNodes) {
+                                state.graph.addEdge(pNode, storeStmt->field, qNode);
+                            }
+                        }
                     }
                 }
             }

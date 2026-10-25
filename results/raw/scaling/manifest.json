@@ -1,0 +1,18 @@
+{
+  "seed": 20261023,
+  "sizes": [
+    8,
+    16,
+    32,
+    64
+  ],
+  "configs": [
+    "A",
+    "B",
+    "C",
+    "D"
+  ],
+  "repetitions": 5,
+  "command_template": "build\\src\\mdehra-driver.exe --input {source} --config {config} --strict --json {json}",
+  "warning": "Not publication evidence until command is validated, analyzer emits status/results, and memory/correctness instrumentation is checked."
+}

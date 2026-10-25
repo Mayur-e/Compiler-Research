@@ -1,0 +1,14 @@
+======================================================================
+  MDE-HRA RESEARCH DRIVER: D:\TS\Seminar\Project\results\raw\scaling\generated\chain_64.c
+  SHA-256: 6acc95614fc88a597d740cdd330b8ddaf45839a5f09c5c2404e8407dd2498f53
+  Mode: STRICT
+======================================================================
+[*] Frontend Translation: OK (17 diagnostics, 0.7597 ms)
+
+----------------------------------------------------------------------
+CFG Config | Solver (ms) | Worklist | Transfers | Pruned | MDE Hit/Miss | Canon Match
+----------------------------------------------------------------------
+Config B    | 0.8710      | 74       | 53        | 0      | 0/0        | -
+----------------------------------------------------------------------
+Invariants: Canonical(B) == Canonical(C): PASS | Canonical(A) == Canonical(D): PASS
+[+] Wrote results JSON: D:\TS\Seminar\Project\results\raw\scaling\result_n64_B_r3.json

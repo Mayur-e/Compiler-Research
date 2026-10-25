@@ -1,0 +1,35 @@
+{
+  "status": "OK",
+  "source_sha256": "9149b6cb405075737741be25b3ad621387b0d0316ac1e40044ef0224d7168b11",
+  "input_file": "D:/TS/Seminar/Project/results/raw/scaling/generated/chain_16.c",
+  "function": "main",
+  "blocks": 19,
+  "bc_invariant": true,
+  "ad_invariant": true,
+  "peak_rss_kb": 24816,
+  "configs": {
+    "B": {
+      "config": "B",
+      "time_solver_ms": 0.8554,
+      "time_frontend_ms": 0.4793,
+      "time_liveness_ms": 0.2976,
+      "time_canonicalize_ms": 0,
+      "time_total_ms": 1.6323,
+      "worklist_iterations": 74,
+      "transfers_executed": 53,
+      "allocs_processed": 3,
+      "assigns_processed": 23,
+      "loads_processed": 11,
+      "stores_processed": 3,
+      "statements_pruned": 0,
+      "bindings_removed": 44,
+      "peak_heap_nodes": 1,
+      "final_heap_nodes": 1,
+      "mde_calls": 0,
+      "mde_hits": 0,
+      "mde_misses": 0,
+      "retained_state_bytes": 0,
+      "hash_collisions": 0
+    }
+  }
+}

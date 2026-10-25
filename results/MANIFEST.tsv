@@ -1,0 +1,141 @@
+category	filename	relative_path	size_bytes	description
+raw_standard	bm01.json	results/raw/benchmarks/bm01.json	2943	4-Config Analysis (A,B,C,D) for bm01
+raw_standard	bm02.json	results/raw/benchmarks/bm02.json	2951	4-Config Analysis (A,B,C,D) for bm02
+raw_standard	bm03.json	results/raw/benchmarks/bm03.json	2948	4-Config Analysis (A,B,C,D) for bm03
+raw_standard	bm04.json	results/raw/benchmarks/bm04.json	2939	4-Config Analysis (A,B,C,D) for bm04
+raw_standard	bm05.json	results/raw/benchmarks/bm05.json	2950	4-Config Analysis (A,B,C,D) for bm05
+raw_standard	bm06.json	results/raw/benchmarks/bm06.json	2941	4-Config Analysis (A,B,C,D) for bm06
+raw_standard	bm07.json	results/raw/benchmarks/bm07.json	2960	4-Config Analysis (A,B,C,D) for bm07
+raw_standard	bm08.json	results/raw/benchmarks/bm08.json	2959	4-Config Analysis (A,B,C,D) for bm08
+raw_synthetic	alias_fields.json	results/raw/synthetic/alias_fields.json	2913	4-Config Analysis (A,B,C,D) for alias_fields
+raw_synthetic	dead_temporaries.json	results/raw/synthetic/dead_temporaries.json	2923	4-Config Analysis (A,B,C,D) for dead_temporaries
+raw_synthetic	loop_chain.json	results/raw/synthetic/loop_chain.json	2931	4-Config Analysis (A,B,C,D) for loop_chain
+raw_synthetic	low_reuse.json	results/raw/synthetic/low_reuse.json	2915	4-Config Analysis (A,B,C,D) for low_reuse
+raw_scaling	raw_runs.csv	results/raw/scaling/raw_runs.csv	28627	Scaling experiment data
+raw_scaling	manifest.json	results/raw/scaling/manifest.json	426	Scaling experiment data
+raw_scaling	result_n16_A_r0.json	results/raw/scaling/result_n16_A_r0.json	982	Scaling experiment data
+raw_scaling	result_n16_A_r1.json	results/raw/scaling/result_n16_A_r1.json	982	Scaling experiment data
+raw_scaling	result_n16_A_r2.json	results/raw/scaling/result_n16_A_r2.json	981	Scaling experiment data
+raw_scaling	result_n16_A_r3.json	results/raw/scaling/result_n16_A_r3.json	982	Scaling experiment data
+raw_scaling	result_n16_A_r4.json	results/raw/scaling/result_n16_A_r4.json	982	Scaling experiment data
+raw_scaling	result_n16_B_r0.json	results/raw/scaling/result_n16_B_r0.json	982	Scaling experiment data
+raw_scaling	result_n16_B_r1.json	results/raw/scaling/result_n16_B_r1.json	983	Scaling experiment data
+raw_scaling	result_n16_B_r2.json	results/raw/scaling/result_n16_B_r2.json	982	Scaling experiment data
+raw_scaling	result_n16_B_r3.json	results/raw/scaling/result_n16_B_r3.json	982	Scaling experiment data
+raw_scaling	result_n16_B_r4.json	results/raw/scaling/result_n16_B_r4.json	983	Scaling experiment data
+raw_scaling	result_n16_C_r0.json	results/raw/scaling/result_n16_C_r0.json	996	Scaling experiment data
+raw_scaling	result_n16_C_r1.json	results/raw/scaling/result_n16_C_r1.json	996	Scaling experiment data
+raw_scaling	result_n16_C_r2.json	results/raw/scaling/result_n16_C_r2.json	996	Scaling experiment data
+raw_scaling	result_n16_C_r3.json	results/raw/scaling/result_n16_C_r3.json	995	Scaling experiment data
+raw_scaling	result_n16_C_r4.json	results/raw/scaling/result_n16_C_r4.json	995	Scaling experiment data
+raw_scaling	result_n16_D_r0.json	results/raw/scaling/result_n16_D_r0.json	996	Scaling experiment data
+raw_scaling	result_n16_D_r1.json	results/raw/scaling/result_n16_D_r1.json	996	Scaling experiment data
+raw_scaling	result_n16_D_r2.json	results/raw/scaling/result_n16_D_r2.json	995	Scaling experiment data
+raw_scaling	result_n16_D_r3.json	results/raw/scaling/result_n16_D_r3.json	994	Scaling experiment data
+raw_scaling	result_n16_D_r4.json	results/raw/scaling/result_n16_D_r4.json	995	Scaling experiment data
+raw_scaling	result_n32_A_r0.json	results/raw/scaling/result_n32_A_r0.json	982	Scaling experiment data
+raw_scaling	result_n32_A_r1.json	results/raw/scaling/result_n32_A_r1.json	982	Scaling experiment data
+raw_scaling	result_n32_A_r2.json	results/raw/scaling/result_n32_A_r2.json	982	Scaling experiment data
+raw_scaling	result_n32_A_r3.json	results/raw/scaling/result_n32_A_r3.json	982	Scaling experiment data
+raw_scaling	result_n32_A_r4.json	results/raw/scaling/result_n32_A_r4.json	982	Scaling experiment data
+raw_scaling	result_n32_B_r0.json	results/raw/scaling/result_n32_B_r0.json	980	Scaling experiment data
+raw_scaling	result_n32_B_r1.json	results/raw/scaling/result_n32_B_r1.json	983	Scaling experiment data
+raw_scaling	result_n32_B_r2.json	results/raw/scaling/result_n32_B_r2.json	982	Scaling experiment data
+raw_scaling	result_n32_B_r3.json	results/raw/scaling/result_n32_B_r3.json	983	Scaling experiment data
+raw_scaling	result_n32_B_r4.json	results/raw/scaling/result_n32_B_r4.json	983	Scaling experiment data
+raw_scaling	result_n32_C_r0.json	results/raw/scaling/result_n32_C_r0.json	994	Scaling experiment data
+raw_scaling	result_n32_C_r1.json	results/raw/scaling/result_n32_C_r1.json	995	Scaling experiment data
+raw_scaling	result_n32_C_r2.json	results/raw/scaling/result_n32_C_r2.json	995	Scaling experiment data
+raw_scaling	result_n32_C_r3.json	results/raw/scaling/result_n32_C_r3.json	995	Scaling experiment data
+raw_scaling	result_n32_C_r4.json	results/raw/scaling/result_n32_C_r4.json	996	Scaling experiment data
+raw_scaling	result_n32_D_r0.json	results/raw/scaling/result_n32_D_r0.json	996	Scaling experiment data
+raw_scaling	result_n32_D_r1.json	results/raw/scaling/result_n32_D_r1.json	995	Scaling experiment data
+raw_scaling	result_n32_D_r2.json	results/raw/scaling/result_n32_D_r2.json	996	Scaling experiment data
+raw_scaling	result_n32_D_r3.json	results/raw/scaling/result_n32_D_r3.json	996	Scaling experiment data
+raw_scaling	result_n32_D_r4.json	results/raw/scaling/result_n32_D_r4.json	996	Scaling experiment data
+raw_scaling	result_n64_A_r0.json	results/raw/scaling/result_n64_A_r0.json	982	Scaling experiment data
+raw_scaling	result_n64_A_r1.json	results/raw/scaling/result_n64_A_r1.json	981	Scaling experiment data
+raw_scaling	result_n64_A_r2.json	results/raw/scaling/result_n64_A_r2.json	982	Scaling experiment data
+raw_scaling	result_n64_A_r3.json	results/raw/scaling/result_n64_A_r3.json	981	Scaling experiment data
+raw_scaling	result_n64_A_r4.json	results/raw/scaling/result_n64_A_r4.json	981	Scaling experiment data
+raw_scaling	result_n64_B_r0.json	results/raw/scaling/result_n64_B_r0.json	982	Scaling experiment data
+raw_scaling	result_n64_B_r1.json	results/raw/scaling/result_n64_B_r1.json	983	Scaling experiment data
+raw_scaling	result_n64_B_r2.json	results/raw/scaling/result_n64_B_r2.json	983	Scaling experiment data
+raw_scaling	result_n64_B_r3.json	results/raw/scaling/result_n64_B_r3.json	982	Scaling experiment data
+raw_scaling	result_n64_B_r4.json	results/raw/scaling/result_n64_B_r4.json	983	Scaling experiment data
+raw_scaling	result_n64_C_r0.json	results/raw/scaling/result_n64_C_r0.json	996	Scaling experiment data
+raw_scaling	result_n64_C_r1.json	results/raw/scaling/result_n64_C_r1.json	996	Scaling experiment data
+raw_scaling	result_n64_C_r2.json	results/raw/scaling/result_n64_C_r2.json	993	Scaling experiment data
+raw_scaling	result_n64_C_r3.json	results/raw/scaling/result_n64_C_r3.json	995	Scaling experiment data
+raw_scaling	result_n64_C_r4.json	results/raw/scaling/result_n64_C_r4.json	996	Scaling experiment data
+raw_scaling	result_n64_D_r0.json	results/raw/scaling/result_n64_D_r0.json	995	Scaling experiment data
+raw_scaling	result_n64_D_r1.json	results/raw/scaling/result_n64_D_r1.json	995	Scaling experiment data
+raw_scaling	result_n64_D_r2.json	results/raw/scaling/result_n64_D_r2.json	996	Scaling experiment data
+raw_scaling	result_n64_D_r3.json	results/raw/scaling/result_n64_D_r3.json	996	Scaling experiment data
+raw_scaling	result_n64_D_r4.json	results/raw/scaling/result_n64_D_r4.json	995	Scaling experiment data
+raw_scaling	result_n8_A_r0.json	results/raw/scaling/result_n8_A_r0.json	981	Scaling experiment data
+raw_scaling	result_n8_A_r1.json	results/raw/scaling/result_n8_A_r1.json	980	Scaling experiment data
+raw_scaling	result_n8_A_r2.json	results/raw/scaling/result_n8_A_r2.json	981	Scaling experiment data
+raw_scaling	result_n8_A_r3.json	results/raw/scaling/result_n8_A_r3.json	981	Scaling experiment data
+raw_scaling	result_n8_A_r4.json	results/raw/scaling/result_n8_A_r4.json	981	Scaling experiment data
+raw_scaling	result_n8_B_r0.json	results/raw/scaling/result_n8_B_r0.json	982	Scaling experiment data
+raw_scaling	result_n8_B_r1.json	results/raw/scaling/result_n8_B_r1.json	982	Scaling experiment data
+raw_scaling	result_n8_B_r2.json	results/raw/scaling/result_n8_B_r2.json	982	Scaling experiment data
+raw_scaling	result_n8_B_r3.json	results/raw/scaling/result_n8_B_r3.json	982	Scaling experiment data
+raw_scaling	result_n8_B_r4.json	results/raw/scaling/result_n8_B_r4.json	981	Scaling experiment data
+raw_scaling	result_n8_C_r0.json	results/raw/scaling/result_n8_C_r0.json	995	Scaling experiment data
+raw_scaling	result_n8_C_r1.json	results/raw/scaling/result_n8_C_r1.json	995	Scaling experiment data
+raw_scaling	result_n8_C_r2.json	results/raw/scaling/result_n8_C_r2.json	995	Scaling experiment data
+raw_scaling	result_n8_C_r3.json	results/raw/scaling/result_n8_C_r3.json	992	Scaling experiment data
+raw_scaling	result_n8_C_r4.json	results/raw/scaling/result_n8_C_r4.json	995	Scaling experiment data
+raw_scaling	result_n8_D_r0.json	results/raw/scaling/result_n8_D_r0.json	995	Scaling experiment data
+raw_scaling	result_n8_D_r1.json	results/raw/scaling/result_n8_D_r1.json	995	Scaling experiment data
+raw_scaling	result_n8_D_r2.json	results/raw/scaling/result_n8_D_r2.json	995	Scaling experiment data
+raw_scaling	result_n8_D_r3.json	results/raw/scaling/result_n8_D_r3.json	994	Scaling experiment data
+raw_scaling	result_n8_D_r4.json	results/raw/scaling/result_n8_D_r4.json	995	Scaling experiment data
+raw_gcc	gcc_c_manifest.tsv	results/raw/gcc14/gcc_c_manifest.tsv	6423	Manifest of 50 ingested GCC c-torture tests
+summary	benchmarks_summary.csv	results/summary/benchmarks_summary.csv	1444	Aggregated metrics & LaTeX/Markdown table
+summary	benchmarks_summary.md	results/summary/benchmarks_summary.md	1866	Aggregated metrics & LaTeX/Markdown table
+summary	gcc_evaluation_summary.json	results/summary/gcc_evaluation_summary.json	196886	Aggregated metrics & LaTeX/Markdown table
+summary	gcc_evaluation_summary.md	results/summary/gcc_evaluation_summary.md	4207	Aggregated metrics & LaTeX/Markdown table
+summary	scaling_summary.csv	results/summary/scaling_summary.csv	556	Aggregated metrics & LaTeX/Markdown table
+summary	scaling_summary.md	results/summary/scaling_summary.md	1086	Aggregated metrics & LaTeX/Markdown table
+summary	synthetic_summary.csv	results/summary/synthetic_summary.csv	982	Aggregated metrics & LaTeX/Markdown table
+summary	synthetic_summary.md	results/summary/synthetic_summary.md	1353	Aggregated metrics & LaTeX/Markdown table
+trace	BM01_A_trace.json	results/traces/BM01_A_trace.json	2895	Static-runtime correlation trace or solver trace
+trace	BM01_B_trace.json	results/traces/BM01_B_trace.json	2835	Static-runtime correlation trace or solver trace
+trace	BM01_C_trace.json	results/traces/BM01_C_trace.json	3658	Static-runtime correlation trace or solver trace
+trace	BM01_correlated_trace.json	results/traces/BM01_correlated_trace.json	11379	Static-runtime correlation trace or solver trace
+trace	BM02_A_trace.json	results/traces/BM02_A_trace.json	4150	Static-runtime correlation trace or solver trace
+trace	BM02_B_trace.json	results/traces/BM02_B_trace.json	4030	Static-runtime correlation trace or solver trace
+trace	BM02_C_trace.json	results/traces/BM02_C_trace.json	4997	Static-runtime correlation trace or solver trace
+trace	BM02_correlated_trace.json	results/traces/BM02_correlated_trace.json	15382	Static-runtime correlation trace or solver trace
+trace	BM03_A_trace.json	results/traces/BM03_A_trace.json	2807	Static-runtime correlation trace or solver trace
+trace	BM03_B_trace.json	results/traces/BM03_B_trace.json	2569	Static-runtime correlation trace or solver trace
+trace	BM03_C_trace.json	results/traces/BM03_C_trace.json	3269	Static-runtime correlation trace or solver trace
+trace	BM03_correlated_trace.json	results/traces/BM03_correlated_trace.json	12208	Static-runtime correlation trace or solver trace
+trace	BM04_A_trace.json	results/traces/BM04_A_trace.json	4192	Static-runtime correlation trace or solver trace
+trace	BM04_B_trace.json	results/traces/BM04_B_trace.json	3908	Static-runtime correlation trace or solver trace
+trace	BM04_C_trace.json	results/traces/BM04_C_trace.json	4746	Static-runtime correlation trace or solver trace
+trace	BM04_correlated_trace.json	results/traces/BM04_correlated_trace.json	14507	Static-runtime correlation trace or solver trace
+trace	BM05_A_trace.json	results/traces/BM05_A_trace.json	6562	Static-runtime correlation trace or solver trace
+trace	BM05_B_trace.json	results/traces/BM05_B_trace.json	6286	Static-runtime correlation trace or solver trace
+trace	BM05_C_trace.json	results/traces/BM05_C_trace.json	8179	Static-runtime correlation trace or solver trace
+trace	BM05_correlated_trace.json	results/traces/BM05_correlated_trace.json	16609	Static-runtime correlation trace or solver trace
+trace	BM06_A_trace.json	results/traces/BM06_A_trace.json	2869	Static-runtime correlation trace or solver trace
+trace	BM06_B_trace.json	results/traces/BM06_B_trace.json	2789	Static-runtime correlation trace or solver trace
+trace	BM06_C_trace.json	results/traces/BM06_C_trace.json	3450	Static-runtime correlation trace or solver trace
+trace	BM06_correlated_trace.json	results/traces/BM06_correlated_trace.json	10857	Static-runtime correlation trace or solver trace
+trace	BM07_A_trace.json	results/traces/BM07_A_trace.json	7524	Static-runtime correlation trace or solver trace
+trace	BM07_B_trace.json	results/traces/BM07_B_trace.json	7062	Static-runtime correlation trace or solver trace
+trace	BM07_C_trace.json	results/traces/BM07_C_trace.json	8314	Static-runtime correlation trace or solver trace
+trace	BM07_correlated_trace.json	results/traces/BM07_correlated_trace.json	23217	Static-runtime correlation trace or solver trace
+trace	BM08_A_trace.json	results/traces/BM08_A_trace.json	6395	Static-runtime correlation trace or solver trace
+trace	BM08_B_trace.json	results/traces/BM08_B_trace.json	5869	Static-runtime correlation trace or solver trace
+trace	BM08_C_trace.json	results/traces/BM08_C_trace.json	8320	Static-runtime correlation trace or solver trace
+trace	BM08_correlated_trace.json	results/traces/BM08_correlated_trace.json	10311	Static-runtime correlation trace or solver trace
+trace	performance_data.json	results/traces/performance_data.json	20365	Static-runtime correlation trace or solver trace
+report	benchmark_protocol.md	results/reports/benchmark_protocol.md	3868	Evaluation report & methodology document
+report	implementation_audit.md	results/reports/implementation_audit.md	12030	Evaluation report & methodology document
+report	mde_hra_q1_upgrade_report.md	results/reports/mde_hra_q1_upgrade_report.md	18954	Evaluation report & methodology document
+report	test_coverage.md	results/reports/test_coverage.md	12628	Evaluation report & methodology document

@@ -71,7 +71,11 @@ target_link_libraries(mdehra-driver PRIVATE
     mdehra_frontend
     mdehra_liveness
     mdehra_solver
+    mdehra_adapter
+    clangTooling
+    psapi
 )
+target_include_directories(mdehra-driver PRIVATE ${PROJECT_SOURCE_DIR}/mde_src/src/include)
 
 # --- Instrumentation executable -----------------------------------------------
 add_executable(instr-driver
@@ -116,3 +120,51 @@ target_link_libraries(ir-dump-driver PRIVATE
     clangTooling
 )
 
+# --- Phase 14: Runtime Events library ----------------------------------------
+add_library(runtime_events STATIC
+    runtime/runtime_events.c
+)
+target_include_directories(runtime_events PUBLIC ${PROJECT_SOURCE_DIR}/include)
+
+# --- Phase 14: Runtime Instrumentor ------------------------------------------
+add_executable(runtime-instrumentor
+    runtime_instrumentor.cpp
+)
+target_include_directories(runtime-instrumentor PRIVATE
+    ${LLVM_INCLUDE_DIRS}
+    ${CLANG_INCLUDE_DIRS}
+)
+target_compile_options(runtime-instrumentor PRIVATE ${LLVM_DEFINITIONS_LIST})
+target_link_libraries(runtime-instrumentor PRIVATE
+    clangTooling
+    clangRewrite
+)
+target_link_options(runtime-instrumentor PRIVATE -Wl,--allow-multiple-definition)
+
+# --- Phase 14: Correlation Engine & Driver -----------------------------------
+add_library(mdehra_correlation STATIC
+    runtime/CorrelationEngine.cpp
+)
+target_include_directories(mdehra_correlation PUBLIC ${PROJECT_SOURCE_DIR}/include)
+
+add_executable(correlation-driver
+    correlation_driver.cpp
+)
+target_link_libraries(correlation-driver PRIVATE
+    mdehra_correlation
+)
+
+# --- Phase 15: Performance Analyzer (native C++ perf comparison tool) ----------
+add_executable(perf-analyzer
+    performance_analyzer.cpp
+)
+target_link_libraries(perf-analyzer PRIVATE
+    mdehra_core
+    mdehra_frontend
+    mdehra_liveness
+    mdehra_solver
+    mdehra_adapter
+    clangTooling
+    psapi          # Win32 PSAPI for GetProcessMemoryInfo
+)
+target_include_directories(perf-analyzer PRIVATE ${PROJECT_SOURCE_DIR}/mde_src/src/include)

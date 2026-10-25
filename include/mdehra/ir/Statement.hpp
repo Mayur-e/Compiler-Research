@@ -17,18 +17,31 @@ enum class StmtType {
     Unknown
 };
 
+struct SourceLocation {
+    std::string filename;
+    unsigned line = 0;
+    unsigned col = 0;
+};
+
 class Statement {
 public:
     virtual ~Statement() = default;
     virtual StmtType getType() const = 0;
+    SourceLocation location;
 };
 
 class AssignStmt : public Statement {
 public:
     Variable dest;
     Variable src;
+    bool isNull = false;
 
-    AssignStmt(Variable d, Variable s) : dest(std::move(d)), src(std::move(s)) {}
+    AssignStmt(Variable d, Variable s) : dest(std::move(d)), src(std::move(s)), isNull(false) {}
+    static std::unique_ptr<AssignStmt> createNull(Variable d) {
+        auto s = std::make_unique<AssignStmt>(std::move(d), Variable());
+        s->isNull = true;
+        return s;
+    }
     StmtType getType() const override { return StmtType::Assign; }
 };
 
@@ -47,8 +60,14 @@ public:
     Variable base;
     Field field;
     Variable value;
+    bool isNull = false;
 
-    StoreStmt(Variable b, Field f, Variable v) : base(std::move(b)), field(std::move(f)), value(std::move(v)) {}
+    StoreStmt(Variable b, Field f, Variable v) : base(std::move(b)), field(std::move(f)), value(std::move(v)), isNull(false) {}
+    static std::unique_ptr<StoreStmt> createNull(Variable b, Field f) {
+        auto s = std::make_unique<StoreStmt>(std::move(b), std::move(f), Variable());
+        s->isNull = true;
+        return s;
+    }
     StmtType getType() const override { return StmtType::Store; }
 };
 
@@ -71,9 +90,20 @@ public:
     StmtType getType() const override { return StmtType::Return; }
 };
 
+class CallStmt : public Statement {
+public:
+    std::string calleeName;
+    std::vector<Variable> arguments;
+
+    CallStmt(std::string name, std::vector<Variable> args)
+        : calleeName(std::move(name)), arguments(std::move(args)) {}
+    StmtType getType() const override { return StmtType::Call; }
+};
+
 class UnknownStmt : public Statement {
 public:
-    UnknownStmt() {}
+    std::string description;
+    UnknownStmt(std::string desc = "") : description(std::move(desc)) {}
     StmtType getType() const override { return StmtType::Unknown; }
 };
 

@@ -1,0 +1,20 @@
+D:/TS/Seminar/Project/benchmarks/gcc/gcc/testsuite/gcc.c-torture/execute/20000717-3.c:5:1: error: return type defaults to 'int' [-Wimplicit-int]
+    5 | foo (p)
+      | ^~~
+D:/TS/Seminar/Project/benchmarks/gcc/gcc/testsuite/gcc.c-torture/execute/20000717-3.c: In function 'main':
+D:/TS/Seminar/Project/benchmarks/gcc/gcc/testsuite/gcc.c-torture/execute/20000717-3.c:24:6: error: implicit declaration of function 'abort' [-Wimplicit-function-declaration]
+   24 |      abort ();
+      |      ^~~~~
+D:/TS/Seminar/Project/benchmarks/gcc/gcc/testsuite/gcc.c-torture/execute/20000717-3.c:1:1: note: include '<stdlib.h>' or provide a declaration of 'abort'
+  +++ |+#include <stdlib.h>
+    1 | /* { dg-additional-options "-std=gnu89" } */
+D:/TS/Seminar/Project/benchmarks/gcc/gcc/testsuite/gcc.c-torture/execute/20000717-3.c:24:6: warning: incompatible implicit declaration of built-in function 'abort' [-Wbuiltin-declaration-mismatch]
+   24 |      abort ();
+      |      ^~~~~
+D:/TS/Seminar/Project/benchmarks/gcc/gcc/testsuite/gcc.c-torture/execute/20000717-3.c:24:6: note: include '<stdlib.h>' or provide a declaration of 'abort'
+D:/TS/Seminar/Project/benchmarks/gcc/gcc/testsuite/gcc.c-torture/execute/20000717-3.c:26:4: error: implicit declaration of function 'exit' [-Wimplicit-function-declaration]
+   26 |    exit (0);
+      |    ^~~~
+D:/TS/Seminar/Project/benchmarks/gcc/gcc/testsuite/gcc.c-torture/execute/20000717-3.c:26:4: note: include '<stdlib.h>' or provide a declaration of 'exit'
+D:/TS/Seminar/Project/benchmarks/gcc/gcc/testsuite/gcc.c-torture/execute/20000717-3.c:26:4: warning: incompatible implicit declaration of built-in function 'exit' [-Wbuiltin-declaration-mismatch]
+D:/TS/Seminar/Project/benchmarks/gcc/gcc/testsuite/gcc.c-torture/execute/20000717-3.c:26:4: note: include '<stdlib.h>' or provide a declaration of 'exit'

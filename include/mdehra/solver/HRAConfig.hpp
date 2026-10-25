@@ -28,10 +28,17 @@ struct HRASolverStats {
     size_t statementsPruned = 0;
     size_t bindingsRemoved = 0;
     
-    // Canonical reuse
+    // Canonical reuse & performance
     size_t canonicalizeCalls = 0;
     size_t newCanonicalStates = 0;
     size_t reusedCanonicalStates = 0;
+    double canonicalizeTimeMs = 0.0;
+    size_t retainedStateBytes = 0;
+
+    // High-water marks
+    size_t peakWorklistSize = 0;   // maximum worklist queue length observed
+    size_t peakHeapNodes   = 0;   // maximum abstract heap node count in any state
+    size_t finalHeapNodes  = 0;   // heap node count in the final exit state
 };
 
 class HRAConfig {

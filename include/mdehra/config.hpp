@@ -39,7 +39,8 @@ constexpr const char* PROJECT_FULL =
 enum class AnalysisConfiguration {
     HRA,              // A: Heap Reference Analysis (baseline, no liveness, no MDE)
     LIVENESS_HRA,     // B: Liveness-pruned HRA
-    LIVENESS_HRA_MDE  // C: Liveness-pruned HRA with MDE structural deduplication
+    LIVENESS_HRA_MDE, // C: Liveness-pruned HRA with MDE structural deduplication
+    HRA_MDE           // D: Baseline HRA with MDE structural deduplication (no liveness)
 };
 
 // Returns a stable, human-readable label for the given configuration.

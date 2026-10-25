@@ -1,0 +1,116 @@
+{
+  "domain_note": "CONCRETE_RUNTIME and STATIC_ANALYSIS are separate domains. Concrete addresses != abstract NodeIDs. alloc_site_map is visualization-only and does not modify HRA semantics.",
+  "benchmark": "BM08",
+  "runtime_stats": {
+    "domain": "CONCRETE_RUNTIME",
+    "loop_iterations": 1,
+    "malloc_count": 2,
+    "branch_count": 2
+  },
+  "static_stats": {
+    "domain": "STATIC_ANALYSIS",
+    "worklist_iters_A": 8,
+    "worklist_iters_B": 8,
+    "worklist_iters_C": 8,
+    "transfers_A": 6,
+    "transfers_B": 6,
+    "transfers_C": 6,
+    "pruned_B": 0,
+    "pruned_C": 0,
+    "mde_hits": 13,
+    "mde_misses": 3
+  },
+  "alloc_site_map": [
+    {"concrete_addr":"0x1d8591f1460","alloc_site":1,"abstract_node":"N1","visualization_only":true},
+    {"concrete_addr":"0x1d8591f1600","alloc_site":2,"abstract_node":"N2","visualization_only":true}
+  ],
+  "all_concrete": [
+    {"type":"RT_PROGRAM_START","stmt_id":0,"line":0,"func_name":"bm08_genuine_loop","var_name":"null","field_name":"null","addr":"0x0","addr2":"0x0","size":0,"alloc_site":0,"branch_taken":0,"loop_iter":0},
+    {"type":"RT_FUNCTION_ENTER","stmt_id":0,"line":41,"func_name":"bm08_genuine_loop","var_name":"null","field_name":"null","addr":"0x0","addr2":"0x0","size":0,"alloc_site":0,"branch_taken":0,"loop_iter":0},
+    {"type":"RT_MALLOC","stmt_id":1,"line":45,"func_name":"bm08_genuine_loop","var_name":"head","field_name":"null","addr":"0x1d8591f1460","addr2":"0x0","size":8,"alloc_site":1,"branch_taken":0,"loop_iter":0},
+    {"type":"RT_PTR_ASSIGN","stmt_id":1,"line":45,"func_name":"bm08_genuine_loop","var_name":"head","field_name":"null","addr":"0x1d8591f1460","addr2":"0x0","size":0,"alloc_site":0,"branch_taken":0,"loop_iter":0},
+    {"type":"RT_MALLOC","stmt_id":2,"line":46,"func_name":"bm08_genuine_loop","var_name":"second","field_name":"null","addr":"0x1d8591f1600","addr2":"0x0","size":8,"alloc_site":2,"branch_taken":0,"loop_iter":0},
+    {"type":"RT_PTR_ASSIGN","stmt_id":2,"line":46,"func_name":"bm08_genuine_loop","var_name":"second","field_name":"null","addr":"0x1d8591f1600","addr2":"0x0","size":0,"alloc_site":0,"branch_taken":0,"loop_iter":0},
+    {"type":"RT_FIELD_STORE","stmt_id":3,"line":47,"func_name":"bm08_genuine_loop","var_name":"null","field_name":"next","addr":"0x1d8591f1460","addr2":"0x1d8591f1600","size":0,"alloc_site":0,"branch_taken":0,"loop_iter":0},
+    {"type":"RT_PTR_ASSIGN","stmt_id":4,"line":48,"func_name":"bm08_genuine_loop","var_name":"p","field_name":"null","addr":"0x1d8591f1460","addr2":"0x0","size":0,"alloc_site":0,"branch_taken":0,"loop_iter":0},
+    {"type":"RT_BRANCH","stmt_id":5,"line":49,"func_name":"bm08_genuine_loop","var_name":"null","field_name":"null","addr":"0x0","addr2":"0x0","size":0,"alloc_site":0,"branch_taken":1,"loop_iter":0},
+    {"type":"RT_LOOP_ITER","stmt_id":5,"line":49,"func_name":"bm08_genuine_loop","var_name":"null","field_name":"null","addr":"0x0","addr2":"0x0","size":0,"alloc_site":0,"branch_taken":0,"loop_iter":1},
+    {"type":"RT_FIELD_LOAD","stmt_id":6,"line":50,"func_name":"bm08_genuine_loop","var_name":"p","field_name":"next","addr":"0x1d8591f1460","addr2":"0x1d8591f1600","size":0,"alloc_site":0,"branch_taken":0,"loop_iter":0},
+    {"type":"RT_BRANCH","stmt_id":5,"line":49,"func_name":"bm08_genuine_loop","var_name":"null","field_name":"null","addr":"0x0","addr2":"0x0","size":0,"alloc_site":0,"branch_taken":0,"loop_iter":0},
+    {"type":"RT_RETURN","stmt_id":7,"line":52,"func_name":"bm08_genuine_loop","var_name":"return","field_name":"null","addr":"0x1d8591f1600","addr2":"0x0","size":0,"alloc_site":0,"branch_taken":0,"loop_iter":0},
+    {"type":"RT_FUNCTION_EXIT","stmt_id":0,"line":52,"func_name":"bm08_genuine_loop","var_name":"null","field_name":"null","addr":"0x0","addr2":"0x0","size":0,"alloc_site":0,"branch_taken":0,"loop_iter":0},
+    {"type":"RT_PROGRAM_END","stmt_id":0,"line":0,"func_name":"null","var_name":"null","field_name":"null","addr":"0x0","addr2":"0x0","size":0,"alloc_site":0,"branch_taken":0,"loop_iter":0}
+  ],
+  "correlated_events": [
+    {
+      "line": 41,
+      "operation": "unknown",
+      "concrete": {"type":"RT_FUNCTION_ENTER","var":"null","addr":"0x0","addr2":"0x0","field":"null","alloc_site":0,"branch_taken":0,"loop_iter":0},
+      "static_A": null,
+      "static_B": null,
+      "static_C": null
+    },
+    {
+      "line": 45,
+      "operation": "alloc",
+      "concrete": {"type":"RT_MALLOC","var":"head","addr":"0x1d8591f1460","addr2":"0x0","field":"null","alloc_site":1,"branch_taken":0,"loop_iter":0},
+      "static_A": {"type":"StmtPost","stmt":"head* = alloc#1","pruned":false,"mde_hit":false,"mde_index":-1,"state":{"bindings":{"head":[1]},"nodes":[1],"edges":[]}},
+      "static_B": {"type":"StmtPost","stmt":"head* = alloc#1","pruned":false,"mde_hit":false,"mde_index":-1,"state":{"bindings":{"head":[1]},"nodes":[1],"edges":[]}},
+      "static_C": {"type":"StmtPost","stmt":"head* = alloc#1","pruned":false,"mde_hit":false,"mde_index":-1,"state":{"bindings":{"head":[1]},"nodes":[1],"edges":[]}},
+      "alloc_correlation": {"concrete_addr":"0x1d8591f1460","alloc_site":1,"abstract_node":"N1","visualization_only":true}
+    },
+    {
+      "line": 46,
+      "operation": "alloc",
+      "concrete": {"type":"RT_MALLOC","var":"second","addr":"0x1d8591f1600","addr2":"0x0","field":"null","alloc_site":2,"branch_taken":0,"loop_iter":0},
+      "static_A": {"type":"StmtPost","stmt":"second* = alloc#2","pruned":false,"mde_hit":false,"mde_index":-1,"state":{"bindings":{"head":[1],"second":[2]},"nodes":[1,2],"edges":[]}},
+      "static_B": {"type":"StmtPost","stmt":"second* = alloc#2","pruned":false,"mde_hit":false,"mde_index":-1,"state":{"bindings":{"head":[1],"second":[2]},"nodes":[1,2],"edges":[]}},
+      "static_C": {"type":"StmtPost","stmt":"second* = alloc#2","pruned":false,"mde_hit":false,"mde_index":-1,"state":{"bindings":{"head":[1],"second":[2]},"nodes":[1,2],"edges":[]}},
+      "alloc_correlation": {"concrete_addr":"0x1d8591f1600","alloc_site":2,"abstract_node":"N2","visualization_only":true}
+    },
+    {
+      "line": 47,
+      "operation": "field_store",
+      "concrete": {"type":"RT_FIELD_STORE","var":"null","addr":"0x1d8591f1460","addr2":"0x1d8591f1600","field":"next","alloc_site":0,"branch_taken":0,"loop_iter":0},
+      "static_A": {"type":"StmtPost","stmt":"head*->next = second*","pruned":false,"mde_hit":false,"mde_index":-1,"state":{"bindings":{"head":[1],"second":[2]},"nodes":[1,2],"edges":[{"source":1,"field":"next","target":2}]}},
+      "static_B": {"type":"StmtPost","stmt":"head*->next = second*","pruned":false,"mde_hit":false,"mde_index":-1,"state":{"bindings":{"head":[1]},"nodes":[1,2],"edges":[{"source":1,"field":"next","target":2}]}},
+      "static_C": {"type":"StmtPost","stmt":"head*->next = second*","pruned":false,"mde_hit":false,"mde_index":-1,"state":{"bindings":{"head":[1]},"nodes":[1,2],"edges":[{"source":1,"field":"next","target":2}]}},
+      "alloc_correlation": {"concrete_addr":"0x1d8591f1460","alloc_site":1,"abstract_node":"N1","visualization_only":true}
+    },
+    {
+      "line": 48,
+      "operation": "assign",
+      "concrete": {"type":"RT_PTR_ASSIGN","var":"p","addr":"0x1d8591f1460","addr2":"0x0","field":"null","alloc_site":0,"branch_taken":0,"loop_iter":0},
+      "static_A": {"type":"StmtPost","stmt":"p* = head*","pruned":false,"mde_hit":false,"mde_index":-1,"state":{"bindings":{"head":[1],"p":[1],"second":[2]},"nodes":[1,2],"edges":[{"source":1,"field":"next","target":2}]}},
+      "static_B": {"type":"StmtPost","stmt":"p* = head*","pruned":false,"mde_hit":false,"mde_index":-1,"state":{"bindings":{"p":[1]},"nodes":[1,2],"edges":[{"source":1,"field":"next","target":2}]}},
+      "static_C": {"type":"StmtPost","stmt":"p* = head*","pruned":false,"mde_hit":false,"mde_index":-1,"state":{"bindings":{"p":[1]},"nodes":[1,2],"edges":[{"source":1,"field":"next","target":2}]}},
+      "alloc_correlation": {"concrete_addr":"0x1d8591f1460","alloc_site":1,"abstract_node":"N1","visualization_only":true}
+    },
+    {
+      "line": 49,
+      "operation": "branch",
+      "concrete": {"type":"RT_BRANCH","var":"null","addr":"0x0","addr2":"0x0","field":"null","alloc_site":0,"branch_taken":1,"loop_iter":0},
+      "static_A": null,
+      "static_B": null,
+      "static_C": null
+    },
+    {
+      "line": 50,
+      "operation": "field_load",
+      "concrete": {"type":"RT_FIELD_LOAD","var":"p","addr":"0x1d8591f1460","addr2":"0x1d8591f1600","field":"next","alloc_site":0,"branch_taken":0,"loop_iter":0},
+      "static_A": {"type":"StmtPost","stmt":"p* = p*->next","pruned":false,"mde_hit":false,"mde_index":-1,"state":{"bindings":{"head":[1],"second":[2]},"nodes":[1,2],"edges":[{"source":1,"field":"next","target":2}]}},
+      "static_B": {"type":"StmtPost","stmt":"p* = p*->next","pruned":false,"mde_hit":false,"mde_index":-1,"state":{"bindings":{},"nodes":[1,2],"edges":[{"source":1,"field":"next","target":2}]}},
+      "static_C": {"type":"StmtPost","stmt":"p* = p*->next","pruned":false,"mde_hit":false,"mde_index":-1,"state":{"bindings":{},"nodes":[1,2],"edges":[{"source":1,"field":"next","target":2}]}},
+      "alloc_correlation": {"concrete_addr":"0x1d8591f1460","alloc_site":1,"abstract_node":"N1","visualization_only":true}
+    },
+    {
+      "line": 52,
+      "operation": "return",
+      "concrete": {"type":"RT_RETURN","var":"return","addr":"0x1d8591f1600","addr2":"0x0","field":"null","alloc_site":0,"branch_taken":0,"loop_iter":0},
+      "static_A": {"type":"StmtPost","stmt":"return p*","pruned":false,"mde_hit":false,"mde_index":-1,"state":{"bindings":{"head":[1],"p":[1],"second":[2]},"nodes":[1,2],"edges":[{"source":1,"field":"next","target":2}]}},
+      "static_B": {"type":"StmtPost","stmt":"return p*","pruned":false,"mde_hit":false,"mde_index":-1,"state":{"bindings":{"p":[1]},"nodes":[1,2],"edges":[{"source":1,"field":"next","target":2}]}},
+      "static_C": {"type":"StmtPost","stmt":"return p*","pruned":false,"mde_hit":false,"mde_index":-1,"state":{"bindings":{"p":[1]},"nodes":[1,2],"edges":[{"source":1,"field":"next","target":2}]}},
+      "alloc_correlation": {"concrete_addr":"0x1d8591f1600","alloc_site":2,"abstract_node":"N2","visualization_only":true}
+    }
+  ]
+}

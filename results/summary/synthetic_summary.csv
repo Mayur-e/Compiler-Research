@@ -1,0 +1,5 @@
+benchmark,sha256,blocks,status,bc_pass,ad_pass,rss_kb,A_solver_ms,A_canon_ms,A_transfers,A_pruned,A_mde_hits,A_mde_misses,A_retained_bytes,B_solver_ms,B_canon_ms,B_transfers,B_pruned,B_mde_hits,B_mde_misses,B_retained_bytes,C_solver_ms,C_canon_ms,C_transfers,C_pruned,C_mde_hits,C_mde_misses,C_retained_bytes,D_solver_ms,D_canon_ms,D_transfers,D_pruned,D_mde_hits,D_mde_misses,D_retained_bytes
+alias_fields,ae25cde1da73,9,OK,True,True,24860,0.2021,0,15,0,0,0,0,0.1139,0,13,2,0,0,0,0.3772,0.1606,13,2,14,4,912,0.3244,0.1569,15,0,15,3,1260
+dead_temporaries,46265be5fe6f,14,OK,True,True,24864,0.3904,0,23,0,0,0,0,0.2931,0,23,0,0,0,0,0.6717,0.3048,23,0,82,8,1692,0.5103,0.2041,23,0,86,4,992
+loop_chain,434513facfbd,19,OK,True,True,24896,1.3327,0,60,0,0,0,0,1.1289,0,53,0,0,0,0,1.4667,0.6594,53,0,133,15,4300,2.1988,1.1886,60,0,150,22,11476
+low_reuse,afaf8a4ec1e6,11,OK,True,True,24864,0.2629,0,16,0,0,0,0,0.2063,0,16,0,0,0,0,0.4883,0.21,16,0,18,4,1136,0.3931,0.1868,16,0,19,3,1376

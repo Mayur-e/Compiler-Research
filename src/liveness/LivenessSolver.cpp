@@ -18,7 +18,9 @@ void LivenessSolver::getUseDef(const ir::Statement* stmt, std::set<ir::Variable>
         case ir::StmtType::Assign: {
             const auto* assignStmt = static_cast<const ir::AssignStmt*>(stmt);
             defSet.insert(assignStmt->dest);
-            useSet.insert(assignStmt->src);
+            if (!assignStmt->isNull) {
+                useSet.insert(assignStmt->src);
+            }
             break;
         }
         case ir::StmtType::Load: {
@@ -29,9 +31,10 @@ void LivenessSolver::getUseDef(const ir::Statement* stmt, std::set<ir::Variable>
         }
         case ir::StmtType::Store: {
             const auto* storeStmt = static_cast<const ir::StoreStmt*>(stmt);
-            // p->next = q
             useSet.insert(storeStmt->base);
-            useSet.insert(storeStmt->value);
+            if (!storeStmt->isNull) {
+                useSet.insert(storeStmt->value);
+            }
             break;
         }
         case ir::StmtType::Return: {
@@ -41,7 +44,13 @@ void LivenessSolver::getUseDef(const ir::Statement* stmt, std::set<ir::Variable>
             }
             break;
         }
-        case ir::StmtType::Call:
+        case ir::StmtType::Call: {
+            const auto* callStmt = static_cast<const ir::CallStmt*>(stmt);
+            for (const auto& arg : callStmt->arguments) {
+                useSet.insert(arg);
+            }
+            break;
+        }
         case ir::StmtType::Unknown:
             break;
     }
@@ -60,25 +69,30 @@ LivenessResult LivenessSolver::run(const ir::Function& func) {
         inWorklist.insert(kv.first);
     }
 
-    // Find unified exit block (block with no successors)
-    ir::ID exitBlockId = 0;
+    // Identify all exit blocks (blocks with no successors)
+    std::vector<ir::ID> exitBlockIds;
     for (const auto& kv : func.blocks) {
         if (kv.second.successors.empty()) {
-            exitBlockId = kv.first;
-            break;
+            exitBlockIds.push_back(kv.first);
         }
     }
 
-    // Seed exit block's liveOut with all returned variables in the function
+    // Collect all returned variables in the function
+    std::set<ir::Variable> allReturnVars;
     for (const auto& kv : func.blocks) {
         for (const auto& stmtPtr : kv.second.statements) {
             if (stmtPtr->getType() == ir::StmtType::Return) {
                 const auto* retStmt = static_cast<const ir::ReturnStmt*>(stmtPtr.get());
                 if (retStmt->hasValue) {
-                    result.liveOut[exitBlockId].insert(retStmt->value);
+                    allReturnVars.insert(retStmt->value);
                 }
             }
         }
+    }
+
+    // Seed all exit blocks' liveOut with returned variables
+    for (ir::ID exitId : exitBlockIds) {
+        result.liveOut[exitId].insert(allReturnVars.begin(), allReturnVars.end());
     }
 
     while (!worklist.empty()) {

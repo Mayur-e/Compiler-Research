@@ -1,0 +1,7 @@
+D:/TS/Seminar/Project/benchmarks/gcc/gcc/testsuite/gcc.c-torture/execute/20000314-1.c: In function 'main':
+D:/TS/Seminar/Project/benchmarks/gcc/gcc/testsuite/gcc.c-torture/execute/20000314-1.c:10:12: warning: cast to pointer from integer of different size [-Wint-to-pointer-cast]
+   10 |       if (*(char *) winds)
+      |            ^
+D:/TS/Seminar/Project/benchmarks/gcc/gcc/testsuite/gcc.c-torture/execute/20000314-1.c:14:36: warning: cast to pointer from integer of different size [-Wint-to-pointer-cast]
+   14 |   if (winds == 0 || winds != 0 || *(char *) winds)
+      |                                    ^

@@ -1,0 +1,191 @@
+{
+  "domain_note": "CONCRETE_RUNTIME and STATIC_ANALYSIS are separate domains. Concrete addresses != abstract NodeIDs. alloc_site_map is visualization-only and does not modify HRA semantics.",
+  "benchmark": "BM06",
+  "summary": {
+    "matched_count": 5,
+    "unmatched_count": 1,
+    "ambiguous_count": 0,
+    "not_applicable_count": 4,
+    "concrete_only_count": 5,
+    "static_only_count": 0
+  },
+  "runtime_stats": {
+    "domain": "CONCRETE_RUNTIME",
+    "loop_iterations": 0,
+    "malloc_count": 1,
+    "branch_count": 0
+  },
+  "static_stats": {
+    "domain": "STATIC_ANALYSIS",
+    "worklist_iters_A": 3,
+    "worklist_iters_B": 3,
+    "worklist_iters_C": 3,
+    "transfers_A": 5,
+    "transfers_B": 5,
+    "transfers_C": 5,
+    "pruned_B": 0,
+    "pruned_C": 0,
+    "mde_hits": 4,
+    "mde_misses": 2
+  },
+  "alloc_site_map": [
+    {"concrete_addr":"0x1774a1aab80","alloc_site":1,"abstract_node":"N1","visualization_only":true}
+  ],
+  "all_concrete": [
+    {"type":"RT_PROGRAM_START","stmt_id":0,"line":0,"func_name":"bm06_loop_list","var_name":"null","field_name":"null","addr":"0x0","addr2":"0x0","size":0,"alloc_site":0,"branch_taken":0,"loop_iter":0},
+    {"type":"RT_FUNCTION_ENTER","stmt_id":0,"line":21,"func_name":"bm06_loop_list","var_name":"null","field_name":"null","addr":"0x0","addr2":"0x0","size":0,"alloc_site":0,"branch_taken":0,"loop_iter":0},
+    {"type":"RT_MALLOC","stmt_id":1,"line":24,"func_name":"bm06_loop_list","var_name":"p","field_name":"null","addr":"0x1774a1aab80","addr2":"0x0","size":8,"alloc_site":1,"branch_taken":0,"loop_iter":0},
+    {"type":"RT_PTR_ASSIGN","stmt_id":1,"line":24,"func_name":"bm06_loop_list","var_name":"p","field_name":"null","addr":"0x1774a1aab80","addr2":"0x0","size":0,"alloc_site":0,"branch_taken":0,"loop_iter":0},
+    {"type":"RT_FIELD_LOAD","stmt_id":2,"line":25,"func_name":"bm06_loop_list","var_name":"q","field_name":"next","addr":"0x1774a1aab80","addr2":"0x1774a1ad290","size":0,"alloc_site":0,"branch_taken":0,"loop_iter":0},
+    {"type":"RT_FIELD_LOAD","stmt_id":3,"line":26,"func_name":"bm06_loop_list","var_name":"q","field_name":"next","addr":"0x1774a1ad290","addr2":"0x1774a1b2d00","size":0,"alloc_site":0,"branch_taken":0,"loop_iter":0},
+    {"type":"RT_FIELD_LOAD","stmt_id":4,"line":27,"func_name":"bm06_loop_list","var_name":"q","field_name":"next","addr":"0x1774a1b2d00","addr2":"0x1774a1a0150","size":0,"alloc_site":0,"branch_taken":0,"loop_iter":0},
+    {"type":"RT_RETURN","stmt_id":5,"line":28,"func_name":"bm06_loop_list","var_name":"return","field_name":"null","addr":"0x1774a1a0150","addr2":"0x0","size":0,"alloc_site":0,"branch_taken":0,"loop_iter":0},
+    {"type":"RT_FUNCTION_EXIT","stmt_id":0,"line":28,"func_name":"bm06_loop_list","var_name":"null","field_name":"null","addr":"0x0","addr2":"0x0","size":0,"alloc_site":0,"branch_taken":0,"loop_iter":0},
+    {"type":"RT_PROGRAM_END","stmt_id":0,"line":0,"func_name":"null","var_name":"null","field_name":"null","addr":"0x0","addr2":"0x0","size":0,"alloc_site":0,"branch_taken":0,"loop_iter":0}
+  ],
+  "concrete_only": [
+    {"type":"RT_PROGRAM_START","stmt_id":0,"line":0,"var_name":"null","field_name":"null","addr":"0x0","addr2":"0x0","alloc_site":0},
+    {"type":"RT_FUNCTION_ENTER","stmt_id":0,"line":21,"var_name":"null","field_name":"null","addr":"0x0","addr2":"0x0","alloc_site":0},
+    {"type":"RT_PTR_ASSIGN","stmt_id":1,"line":24,"var_name":"p","field_name":"null","addr":"0x1774a1aab80","addr2":"0x0","alloc_site":0},
+    {"type":"RT_FUNCTION_EXIT","stmt_id":0,"line":28,"var_name":"null","field_name":"null","addr":"0x0","addr2":"0x0","alloc_site":0},
+    {"type":"RT_PROGRAM_END","stmt_id":0,"line":0,"var_name":"null","field_name":"null","addr":"0x0","addr2":"0x0","alloc_site":0}
+  ],
+  "static_only": [
+
+  ],
+  "correlated_events": [
+    {
+      "line": 0,
+      "stmt_id": 0,
+      "occurrence_index": 1,
+      "operation": "program_start",
+      "correlation_status": "NOT_APPLICABLE_TO_STATIC_ANALYSIS",
+      "is_concrete_only": true,
+      "is_static_only": false,
+      "concrete": {"type":"RT_PROGRAM_START","var":"null","addr":"0x0","addr2":"0x0","field":"null","alloc_site":0,"branch_taken":0,"loop_iter":0},
+      "static_A": null,
+      "static_B": null,
+      "static_C": null
+    },
+    {
+      "line": 21,
+      "stmt_id": 0,
+      "occurrence_index": 1,
+      "operation": "function_enter",
+      "correlation_status": "NOT_APPLICABLE_TO_STATIC_ANALYSIS",
+      "is_concrete_only": true,
+      "is_static_only": false,
+      "concrete": {"type":"RT_FUNCTION_ENTER","var":"null","addr":"0x0","addr2":"0x0","field":"null","alloc_site":0,"branch_taken":0,"loop_iter":0},
+      "static_A": null,
+      "static_B": null,
+      "static_C": null
+    },
+    {
+      "line": 24,
+      "stmt_id": 1,
+      "occurrence_index": 1,
+      "operation": "alloc",
+      "correlation_status": "MATCHED",
+      "is_concrete_only": false,
+      "is_static_only": false,
+      "concrete": {"type":"RT_MALLOC","var":"p","addr":"0x1774a1aab80","addr2":"0x0","field":"null","alloc_site":1,"branch_taken":0,"loop_iter":0},
+      "static_A": {"type":"StmtPost","stmt":"p* = alloc#1","pruned":false,"mde_hit":false,"mde_index":-1,"state":{"bindings":{"p":[1]},"nodes":[1],"edges":[]}},
+      "static_B": {"type":"StmtPost","stmt":"p* = alloc#1","pruned":false,"mde_hit":false,"mde_index":-1,"state":{"bindings":{"p":[1]},"nodes":[1],"edges":[]}},
+      "static_C": {"type":"StmtPost","stmt":"p* = alloc#1","pruned":false,"mde_hit":false,"mde_index":-1,"state":{"bindings":{"p":[1]},"nodes":[1],"edges":[]}},
+      "alloc_correlation": {"concrete_addr":"0x1774a1aab80","alloc_site":1,"abstract_node":"N1","visualization_only":true}
+    },
+    {
+      "line": 24,
+      "stmt_id": 1,
+      "occurrence_index": 1,
+      "operation": "assign",
+      "correlation_status": "UNMATCHED",
+      "is_concrete_only": true,
+      "is_static_only": false,
+      "concrete": {"type":"RT_PTR_ASSIGN","var":"p","addr":"0x1774a1aab80","addr2":"0x0","field":"null","alloc_site":0,"branch_taken":0,"loop_iter":0},
+      "static_A": null,
+      "static_B": null,
+      "static_C": null,
+      "alloc_correlation": {"concrete_addr":"0x1774a1aab80","alloc_site":1,"abstract_node":"N1","visualization_only":true}
+    },
+    {
+      "line": 25,
+      "stmt_id": 2,
+      "occurrence_index": 1,
+      "operation": "field_load",
+      "correlation_status": "MATCHED",
+      "is_concrete_only": false,
+      "is_static_only": false,
+      "concrete": {"type":"RT_FIELD_LOAD","var":"q","addr":"0x1774a1aab80","addr2":"0x1774a1ad290","field":"next","alloc_site":0,"branch_taken":0,"loop_iter":0},
+      "static_A": {"type":"StmtPost","stmt":"q* = p*->next","pruned":false,"mde_hit":false,"mde_index":-1,"state":{"bindings":{"p":[1]},"nodes":[1],"edges":[]}},
+      "static_B": {"type":"StmtPost","stmt":"q* = p*->next","pruned":false,"mde_hit":false,"mde_index":-1,"state":{"bindings":{},"nodes":[1],"edges":[]}},
+      "static_C": {"type":"StmtPost","stmt":"q* = p*->next","pruned":false,"mde_hit":false,"mde_index":-1,"state":{"bindings":{},"nodes":[1],"edges":[]}},
+      "alloc_correlation": {"concrete_addr":"0x1774a1aab80","alloc_site":1,"abstract_node":"N1","visualization_only":true}
+    },
+    {
+      "line": 26,
+      "stmt_id": 3,
+      "occurrence_index": 1,
+      "operation": "field_load",
+      "correlation_status": "MATCHED",
+      "is_concrete_only": false,
+      "is_static_only": false,
+      "concrete": {"type":"RT_FIELD_LOAD","var":"q","addr":"0x1774a1ad290","addr2":"0x1774a1b2d00","field":"next","alloc_site":0,"branch_taken":0,"loop_iter":0},
+      "static_A": {"type":"StmtPost","stmt":"q* = q*->next","pruned":false,"mde_hit":false,"mde_index":-1,"state":{"bindings":{"p":[1]},"nodes":[1],"edges":[]}},
+      "static_B": {"type":"StmtPost","stmt":"q* = q*->next","pruned":false,"mde_hit":false,"mde_index":-1,"state":{"bindings":{},"nodes":[1],"edges":[]}},
+      "static_C": {"type":"StmtPost","stmt":"q* = q*->next","pruned":false,"mde_hit":false,"mde_index":-1,"state":{"bindings":{},"nodes":[1],"edges":[]}}
+    },
+    {
+      "line": 27,
+      "stmt_id": 4,
+      "occurrence_index": 1,
+      "operation": "field_load",
+      "correlation_status": "MATCHED",
+      "is_concrete_only": false,
+      "is_static_only": false,
+      "concrete": {"type":"RT_FIELD_LOAD","var":"q","addr":"0x1774a1b2d00","addr2":"0x1774a1a0150","field":"next","alloc_site":0,"branch_taken":0,"loop_iter":0},
+      "static_A": {"type":"StmtPost","stmt":"q* = q*->next","pruned":false,"mde_hit":false,"mde_index":-1,"state":{"bindings":{"p":[1]},"nodes":[1],"edges":[]}},
+      "static_B": {"type":"StmtPost","stmt":"q* = q*->next","pruned":false,"mde_hit":false,"mde_index":-1,"state":{"bindings":{},"nodes":[1],"edges":[]}},
+      "static_C": {"type":"StmtPost","stmt":"q* = q*->next","pruned":false,"mde_hit":false,"mde_index":-1,"state":{"bindings":{},"nodes":[1],"edges":[]}}
+    },
+    {
+      "line": 28,
+      "stmt_id": 5,
+      "occurrence_index": 1,
+      "operation": "return",
+      "correlation_status": "MATCHED",
+      "is_concrete_only": false,
+      "is_static_only": false,
+      "concrete": {"type":"RT_RETURN","var":"return","addr":"0x1774a1a0150","addr2":"0x0","field":"null","alloc_site":0,"branch_taken":0,"loop_iter":0},
+      "static_A": {"type":"StmtPost","stmt":"return q*","pruned":false,"mde_hit":false,"mde_index":-1,"state":{"bindings":{"p":[1]},"nodes":[1],"edges":[]}},
+      "static_B": {"type":"StmtPost","stmt":"return q*","pruned":false,"mde_hit":false,"mde_index":-1,"state":{"bindings":{},"nodes":[1],"edges":[]}},
+      "static_C": {"type":"StmtPost","stmt":"return q*","pruned":false,"mde_hit":false,"mde_index":-1,"state":{"bindings":{},"nodes":[1],"edges":[]}}
+    },
+    {
+      "line": 28,
+      "stmt_id": 0,
+      "occurrence_index": 1,
+      "operation": "function_exit",
+      "correlation_status": "NOT_APPLICABLE_TO_STATIC_ANALYSIS",
+      "is_concrete_only": true,
+      "is_static_only": false,
+      "concrete": {"type":"RT_FUNCTION_EXIT","var":"null","addr":"0x0","addr2":"0x0","field":"null","alloc_site":0,"branch_taken":0,"loop_iter":0},
+      "static_A": null,
+      "static_B": null,
+      "static_C": null
+    },
+    {
+      "line": 0,
+      "stmt_id": 0,
+      "occurrence_index": 1,
+      "operation": "program_end",
+      "correlation_status": "NOT_APPLICABLE_TO_STATIC_ANALYSIS",
+      "is_concrete_only": true,
+      "is_static_only": false,
+      "concrete": {"type":"RT_PROGRAM_END","var":"null","addr":"0x0","addr2":"0x0","field":"null","alloc_site":0,"branch_taken":0,"loop_iter":0},
+      "static_A": null,
+      "static_B": null,
+      "static_C": null
+    }
+  ]
+}

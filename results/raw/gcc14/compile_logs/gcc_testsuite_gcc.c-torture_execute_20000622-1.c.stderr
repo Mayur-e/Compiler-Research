@@ -1,0 +1,4 @@
+D:/TS/Seminar/Project/benchmarks/gcc/gcc/testsuite/gcc.c-torture/execute/20000622-1.c: In function 'baz':
+D:/TS/Seminar/Project/benchmarks/gcc/gcc/testsuite/gcc.c-torture/execute/20000622-1.c:17:7: warning: cast from pointer to integer of different size [-Wpointer-to-int-cast]
+   17 |   d = (long)c;
+      |       ^

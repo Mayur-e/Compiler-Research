@@ -13,6 +13,7 @@ public:
 
     std::shared_ptr<const hra::HRAState> getBlockEntryState(ir::ID blockId) const;
     std::shared_ptr<const hra::HRAState> getBlockExitState(ir::ID blockId) const;
+    std::shared_ptr<const hra::HRAState> getFunctionExitState(const ir::Function& func) const;
 
 private:
     hra::HRAState transferBlock(const ir::BasicBlock& block, const hra::HRAState& inState, HRAConfig* config);

@@ -1,0 +1,9 @@
+benchmark,sha256,blocks,status,bc_pass,ad_pass,rss_kb,A_solver_ms,A_canon_ms,A_transfers,A_pruned,A_mde_hits,A_mde_misses,A_retained_bytes,B_solver_ms,B_canon_ms,B_transfers,B_pruned,B_mde_hits,B_mde_misses,B_retained_bytes,C_solver_ms,C_canon_ms,C_transfers,C_pruned,C_mde_hits,C_mde_misses,C_retained_bytes,D_solver_ms,D_canon_ms,D_transfers,D_pruned,D_mde_hits,D_mde_misses,D_retained_bytes
+bm01,b305c4ff76c3,3,OK,True,True,22808,0.0545,0,4,0,0,0,0,0.0317,0,4,0,0,0,0,0.2328,0.0813,4,0,4,2,452,0.1438,0.0721,4,0,4,2,552
+bm02,e3ae910b4047,3,OK,True,True,22820,0.0826,0,6,0,0,0,0,0.0529,0,6,0,0,0,0,0.3357,0.1179,6,0,4,2,512,0.244,0.1384,6,0,4,2,712
+bm03,a72b4cfbaef3,3,OK,True,True,22768,0.0549,0,4,0,0,0,0,0.0225,0,2,2,0,0,0,0.2196,0.0691,2,2,4,2,392,0.152,0.0806,4,0,4,2,600
+bm04,ee1a05c3a3ed,3,OK,True,True,22852,0.0725,0,7,0,0,0,0,0.0438,0,7,0,0,0,0,0.2719,0.0843,7,0,4,2,452,0.1872,0.0976,7,0,4,2,852
+bm05,34511e0bc349,6,OK,True,True,22972,0.104,0,9,0,0,0,0,0.0724,0,9,0,0,0,0,0.3935,0.1879,9,0,8,4,1136,0.3719,0.2574,9,0,8,4,1744
+bm06,04d65a3971d9,3,OK,True,True,22824,0.0586,0,8,0,0,0,0,0.0497,0,8,0,0,0,0,0.2619,0.0745,8,0,4,2,388,0.1539,0.0777,8,0,4,2,776
+bm07,f98dcb7058b9,3,OK,True,True,22852,0.1057,0,11,0,0,0,0,0.0767,0,10,1,0,0,0,0.42,0.1676,10,1,4,2,624,0.3489,0.2184,11,0,4,2,1128
+bm08,fa7cde00d79b,7,OK,True,True,22964,0.2167,0,10,0,0,0,0,0.1369,0,10,0,0,0,0,0.4293,0.1853,10,0,18,4,1072,0.587,0.3331,10,0,18,4,1872

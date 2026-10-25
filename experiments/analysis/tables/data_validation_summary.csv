@@ -1,0 +1,10 @@
+Metric,Value
+Total Data Rows,240
+Unique Benchmarks,"8 (bm01_simple_alloc, bm02_linked_list_build, bm03_dead_pointers, bm04_aliasing, bm05_branch_alloc, bm06_loop_list, bm07_multi_field_graph, bm08_genuine_loop)"
+Configurations,"3 (A, B, C)"
+Repetitions per Pair (Min/Max),10 / 10
+Expected Total Rows,8 * 3 * 10 = 240
+Missing / Null Values,0
+Duplicate Run IDs,0
+Failed Runs (success != 1),0
+Coverage Consistency,Complete & Balanced (10 runs for all 24 pairs)

@@ -141,3 +141,60 @@ add_executable(e2e_correctness_test e2e_correctness_test.cpp)
 target_include_directories(e2e_correctness_test PRIVATE ${PROJECT_SOURCE_DIR}/mde_src/src/include)
 target_link_libraries(e2e_correctness_test PRIVATE mdehra_solver mdehra_liveness mdehra_adapter mdehra_frontend clangTooling)
 add_test(NAME Phase9_E2ECorrectnessTest COMMAND e2e_correctness_test)
+
+# --- Frontend Diagnostics & Coverage Test (Upgrade Pack) --------------------
+add_executable(frontend_diagnostics_test frontend_diagnostics_test.cpp)
+target_include_directories(frontend_diagnostics_test PRIVATE
+    ${PROJECT_SOURCE_DIR}/include
+    ${LLVM_INCLUDE_DIRS}
+    ${CLANG_INCLUDE_DIRS}
+)
+target_compile_options(frontend_diagnostics_test PRIVATE ${LLVM_DEFINITIONS_LIST})
+target_link_libraries(frontend_diagnostics_test PRIVATE
+    mdehra_frontend
+    mdehra_ir
+    clangTooling
+    clangFrontend
+    clangSerialization
+    clangDriver
+    clangParse
+    clangSema
+    clangAnalysis
+    clangEdit
+    clangAST
+    clangLex
+    clangBasic
+    ${llvm_libs}
+)
+add_test(NAME Upgrade_FrontendDiagnosticsTest COMMAND frontend_diagnostics_test)
+
+# --- Semantics & Invariants Validation Test (Upgrade Pack) ------------------
+add_executable(semantics_validation_test semantics_validation_test.cpp)
+target_include_directories(semantics_validation_test PRIVATE
+    ${PROJECT_SOURCE_DIR}/include
+    ${PROJECT_SOURCE_DIR}/mde_src/src/include
+    ${LLVM_INCLUDE_DIRS}
+    ${CLANG_INCLUDE_DIRS}
+)
+target_compile_options(semantics_validation_test PRIVATE ${LLVM_DEFINITIONS_LIST})
+target_link_libraries(semantics_validation_test PRIVATE
+    mdehra_solver
+    mdehra_liveness
+    mdehra_adapter
+    mdehra_frontend
+    mdehra_ir
+    clangTooling
+    clangFrontend
+    clangSerialization
+    clangDriver
+    clangParse
+    clangSema
+    clangAnalysis
+    clangEdit
+    clangAST
+    clangLex
+    clangBasic
+    ${llvm_libs}
+)
+add_test(NAME Upgrade_SemanticsValidationTest COMMAND semantics_validation_test)
+

@@ -78,14 +78,21 @@ env/
 *.orig
 Thumbs.db
 .DS_Store
-
-# ---------------------------------------------------------------------------
-# Experimental output (future phases)
-# ---------------------------------------------------------------------------
-results/
-output/
-*.csv
-*.json.out
+*.zip
 *.log
 InstallationLog.txt
-visualization/*_trace.json
+build_error*.log
+
+# Windows directory junctions (mirrors of benchmarks/ and results/)
+benchmark
+result
+
+# Scratch and unrelated files
+scratch/
+DecentraHack*
+
+# ---------------------------------------------------------------------------
+# Transient build/test output
+# ---------------------------------------------------------------------------
+output/
+*.json.out

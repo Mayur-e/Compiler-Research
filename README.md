@@ -8,21 +8,26 @@
 
 This project investigates whether **structural deduplication using MDE / LatticeHashForest** can make **liveness-pruned Heap Reference Analysis (HRA)** more scalable while preserving the analysis result.
 
-The system implements three experimental configurations evaluated on a synthetic benchmark corpus:
+The system implements four experimental configurations evaluated on synthetic and controlled benchmark suites:
 
 | Label | Configuration | Purpose |
 |---|---|---|
 | **A** | HRA | Baseline heap reference analysis |
 | **B** | Liveness + HRA | Liveness-pruned baseline |
-| **C** | Liveness + HRA + MDE | Full proposed system |
+| **C** | Liveness + HRA + MDE | Full proposed system (liveness pruning + structural deduplication) |
+| **D** | HRA + MDE | Ablation baseline (MDE structural deduplication without liveness) |
 
-The primary correctness requirement is:
+The primary correctness requirements are the dual invariants:
 
 ```
-CanonicalResult(B) == CanonicalResult(C)
+CanonicalResult(B) == CanonicalResult(C)  // Over live-at-exit variables
+CanonicalResult(A) == CanonicalResult(D)  // Over all program variables
 ```
 
-The primary performance comparison is **B vs C**, which isolates the effect of MDE structural deduplication.
+The primary performance comparisons are:
+- **B vs C:** Isolates the effect of MDE structural deduplication on liveness-pruned states.
+- **A vs D:** Isolates the effect of MDE structural deduplication on unpruned baseline states.
+- **D vs C:** Isolates the acceleration and memory saving of pruning dead variables before memoization.
 
 ---
 
@@ -54,6 +59,11 @@ The primary performance comparison is **B vs C**, which isolates the effect of M
 | 13 | Live Execution & Visualization | ✅ COMPLETE |
 | 13.1 | Developer View Refinement | ✅ COMPLETE |
 | 13.2 | Developer View Interaction Refinement | ✅ COMPLETE |
+| 14 | Concrete Runtime + Static Analysis Correlation | ✅ COMPLETE |
+| 14.1 | Runtime Instrumentation & Correlation Audit | ✅ COMPLETE |
+| 14.2 | Correct Runtime Instrumentation & Safe Correlation | ✅ COMPLETE |
+| 15 | Integrated MDE-HRA Performance Analyzer & Developer Visualizer | ✅ COMPLETE |
+| **Q1 Upgrade** | **Research-Grade Evaluation Upgrade Pack (Strict Frontend, MDE Fingerprinting, Config D, Driver CLI, Scaling)** | ✅ **COMPLETE** |
 
 ---
 
@@ -342,15 +352,83 @@ All panels synchronize to the currently selected trace event:
 | **Raw Event Log** | Clickable full trace listing |
 
 ### Generating new traces
-
+ 
 ```powershell
 $env:PATH = "D:\msys64\ucrt64\bin;$env:PATH"
-.\build\src\trace-driver.exe experiments\benchmarks\bm03_dead_pointers.c A > visualization\BM03_A_trace.json
-.\build\src\trace-driver.exe experiments\benchmarks\bm03_dead_pointers.c B > visualization\BM03_B_trace.json
-.\build\src\trace-driver.exe experiments\benchmarks\bm03_dead_pointers.c C > visualization\BM03_C_trace.json
-.\build\src\trace-driver.exe experiments\benchmarks\bm08_genuine_loop.c  A > visualization\BM08_A_trace.json
-.\build\src\trace-driver.exe experiments\benchmarks\bm08_genuine_loop.c  B > visualization\BM08_B_trace.json
-.\build\src\trace-driver.exe experiments\benchmarks\bm08_genuine_loop.c  C > visualization\BM08_C_trace.json
+.\build\src\trace-driver.exe experiments\benchmarks\bm03_dead_pointers.c A visualization\BM03_A_trace.json
+.\build\src\trace-driver.exe experiments\benchmarks\bm03_dead_pointers.c B visualization\BM03_B_trace.json
+.\build\src\trace-driver.exe experiments\benchmarks\bm03_dead_pointers.c C visualization\BM03_C_trace.json
+.\build\src\trace-driver.exe experiments\benchmarks\bm08_genuine_loop.c  A visualization\BM08_A_trace.json
+.\build\src\trace-driver.exe experiments\benchmarks\bm08_genuine_loop.c  B visualization\BM08_B_trace.json
+.\build\src\trace-driver.exe experiments\benchmarks\bm08_genuine_loop.c  C visualization\BM08_C_trace.json
+```
+
+---
+
+## Phase 14: Concrete Runtime + Static Analysis Correlation
+
+Phase 14 pairs actual physical execution of benchmark programs on the CPU with static analysis traces:
+1. **Instrument Source**: Clang Tooling rewriter (`runtime-instrumentor.exe`) instruments memory allocation, pointer assignments, field loads/stores, branch decisions, and loops with safe null guards and zero-initialization.
+2. **Compile Native Binary**: GCC compiles the instrumented benchmark with `src/runtime/runtime_events.c`.
+3. **Execute Native Binary**: Physical binary runs on the host CPU, outputting hardware addresses (`0x...`), loop trip counts, and branch choices.
+4. **Run Static Traces**: Runs Configurations A, B, and C via `trace-driver.exe`.
+5. **Correlate Streams**: `correlation-driver.exe` correlates dynamic runtime events with static analysis dataflow transitions via source lines and allocation sites (`alloc_site_map`), enforcing strict domain separation.
+
+### Running the Correlation Pipeline
+
+To run the complete automated correlation pipeline across all benchmarks BM01–BM08:
+
+```powershell
+python experiments\run_correlation.py
+```
+
+This compiles, runs, and outputs correlated traces for all benchmarks into `visualization/<BM>_correlated_trace.json`.
+
+---
+
+## Phase 15: Integrated MDE-HRA Performance Analyzer & Developer Visualizer
+
+Phase 15 provides an end-to-end, demonstration-ready performance analysis and interactive visualization system connecting frontend parsing, IR construction, pointer liveness, HRA, MDE deduplication, concrete execution traces, and correlation.
+
+### Components
+
+1. **Integrated CLI Performance Analyzer (`perf-analyzer.exe`)**:
+   - Compares Configurations A, B, and C side-by-side with warmup and multi-iteration timing (`--reps N --warmup M`).
+   - Reports median analysis time (ms), peak memory (KB), worklist iterations, transfer operations, dead-pointer pruning stats, and MDE cache hit/miss statistics.
+   - Enforces and displays the equivalence theorem: `CanonicalResult(B) == CanonicalResult(C)`.
+   - Generates machine-readable performance metrics (`--json <path>`) and plain-English narratives (`--explain`).
+
+2. **Full Automated Campaign Runner (`experiments/run_phase15.py`)**:
+   - Executes `perf-analyzer` across the entire benchmark suite (BM01–BM08).
+   - Generates static trace JSONs for Phase 13 debugger.
+   - Executes the concrete correlation pipeline for runtime-safe benchmarks (BM01–BM05, BM07), while respecting safety boundaries (excluding BM06 and BM08).
+   - Aggregates all results into `visualization/performance_data.json`.
+
+3. **Multi-Tab Developer Visualizer (`visualization/index.html` & `visualization/app.js`)**:
+   - **Tab 1: Performance Dashboard (Phase 15)**:
+     - Real-time benchmark cards with status badges (PASS / BC Match / Runtime Excluded).
+     - Global summary KPIs: Overall Speedup, MDE Hit Rate, Pruning Rate, B==C Verification.
+     - Side-by-side metric comparison cards with interactive bar charts (Time, Peak Heap Nodes, Pruning Count, MDE Hits/Misses).
+     - Detailed metrics breakdown table (Worklist iterations, transfers, allocations, stores, peak worklist size).
+     - Plain-English explanation panel explaining MDE performance impact per benchmark.
+     - Complete benchmarks overview comparison table across BM01–BM08.
+   - **Tab 2: Concrete vs Static Correlation (Phase 14)**:
+     - Side-by-side synchronized comparison between dynamic hardware execution events (real memory addresses, pointer dereferences) and static analysis abstract states.
+   - **Tab 3: Static Trace Debugger (Phase 13)**:
+     - Step-by-step fixpoint solver stepping with live Points-To Graph, Liveness Map, and MDE Cache State.
+
+### Running Phase 15
+
+```powershell
+# 1. Run the full campaign runner
+$env:PATH = "D:\msys64\ucrt64\bin;$env:PATH"
+python experiments\run_phase15.py --reps 10 --warmup 1
+
+# 2. Launch the developer visualization server
+python -m http.server 8765 --directory visualization
+
+# 3. Open in browser
+# http://localhost:8765/index.html
 ```
 
 ---
